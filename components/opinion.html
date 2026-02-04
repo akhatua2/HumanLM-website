@@ -1,0 +1,314 @@
+<style>
+    .reddit-container { max-width: 640px; }
+
+    .reddit-card {
+        background: #1A1A1B;
+        border: 1px solid #343536;
+        color: #D7DADC;
+        overflow: hidden;
+    }
+
+    .reddit-header {
+        background: #FF4500;
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .reddit-icon {
+        width: 28px;
+        height: 28px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .reddit-icon svg {
+        width: 20px;
+        height: 20px;
+        fill: #FF4500;
+    }
+
+    .reddit-wordmark {
+        color: white;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    .reddit-sub {
+        color: white;
+        opacity: 0.9;
+        font-size: 13px;
+    }
+
+    .reddit-post {
+        display: flex;
+    }
+
+    .reddit-votes {
+        width: 40px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        background: #161617;
+        font-size: 12px;
+    }
+
+    .reddit-vote-btn {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #818384;
+        cursor: pointer;
+    }
+
+    .reddit-vote-count {
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .reddit-content {
+        flex: 1;
+        padding: 10px 14px;
+    }
+
+    .reddit-meta {
+        font-size: 11px;
+        color: #818384;
+        margin-bottom: 6px;
+    }
+
+    .reddit-meta a {
+        color: #D7DADC;
+        text-decoration: none;
+    }
+
+    .reddit-title {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 10px;
+        line-height: 1.4;
+    }
+
+    .reddit-body {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .reddit-body .expandable:not(.expanded)::after {
+        background: linear-gradient(transparent, #1A1A1B);
+    }
+
+    .reddit-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+        font-size: 11px;
+        font-weight: 700;
+        color: #818384;
+    }
+
+    .reddit-action {
+        padding: 4px 6px;
+        cursor: pointer;
+    }
+
+    .reddit-comments {
+        border-top: 1px solid #343536;
+        padding: 14px;
+    }
+
+    .reddit-comment {
+        display: flex;
+        margin-bottom: 12px;
+    }
+
+    .reddit-thread-line {
+        width: 18px;
+        display: flex;
+        justify-content: center;
+        padding-top: 6px;
+    }
+
+    .thread-line {
+        width: 2px;
+        background: #343536;
+        height: 100%;
+    }
+
+    .reddit-comment-content {
+        flex: 1;
+        padding-left: 8px;
+    }
+
+    .reddit-comment-meta {
+        font-size: 11px;
+        color: #818384;
+        margin-bottom: 4px;
+    }
+
+    .reddit-comment-meta .author {
+        color: #D7DADC;
+        font-weight: 500;
+    }
+
+    .reddit-comment-text {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .reddit-user-input {
+        background: rgba(255,69,0,0.1);
+        border: 1px solid rgba(255,69,0,0.3);
+        padding: 14px;
+        margin-top: 14px;
+    }
+
+    .reddit-persona .expandable:not(.expanded)::after {
+        background: linear-gradient(transparent, #FFFBEB);
+    }
+
+    .reddit-ground-truth {
+        background: rgba(255,69,0,0.15);
+        border-left: 3px solid #FF4500;
+        padding: 12px;
+    }
+
+    .reddit-ground-truth .ground-truth-label {
+        color: #FF4500;
+    }
+</style>
+
+<div class="reddit-container">
+    <div class="reddit-card">
+        <div class="reddit-header">
+            <div class="reddit-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FF4500"/><circle cx="8.5" cy="10" r="1.5" fill="white"/><circle cx="15.5" cy="10" r="1.5" fill="white"/><path d="M7.5 14.5c0 0 2 2 4.5 2s4.5-2 4.5-2" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+            </div>
+            <span class="reddit-wordmark">reddit</span>
+            <span class="reddit-sub">r/AmItheAsshole</span>
+        </div>
+
+        <div class="reddit-post">
+            <div class="reddit-votes">
+                <div class="reddit-vote-btn">▲</div>
+                <div class="reddit-vote-count">•</div>
+                <div class="reddit-vote-btn">▼</div>
+            </div>
+            <div class="reddit-content">
+                <div class="reddit-meta">Posted by <a href="#">u/ThrowRAhalloweendred</a> · 6h</div>
+                <div class="reddit-title">AITA for telling my mom it wasn't cute or funny to dress me as a hot dog instead of a princess?</div>
+                <div class="reddit-body expandable" id="reddit-post-1">
+                    So there's this new Target commercial going around where a little girl dresses as a hot dog, and it came on while my family was watching a scary movie. I (20F) am home from college for the weekend and brought my boyfriend, and my mother (57F) decided it would be hilarious to mention that she'd made me a hot dog costume as a kid, except the way she told the story, it was my request. She said that all the girls wanted to be Disney princesses, but I had asked to be a hot dog, and so she'd gone out of her way to make me that costume.<br><br>
+                    This is not what happened, and I said as much. What actually happened is that I wanted to be Snow White, and had told everyone, including the teachers, that I was going to be Snow White. I was obsessed with that movie as a kid. My mother decided that she wanted to be quirky and that Snow White was a bad role model after I got in trouble for trying to cook dinner for my family. I was about eight, and I tried to make hot dogs. My mom "surprised" me on the day of with this crappy hot dog suit, and told me if I didn't wear it she'd never let me watch Snow White again.
+                </div>
+                <button class="expand-btn" onclick="toggleExpand('reddit-post-1', this)">Show more</button>
+                <div class="reddit-actions">
+                    <span class="reddit-action">Comments</span>
+                    <span class="reddit-action">Share</span>
+                    <span class="reddit-action">Save</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="reddit-comments">
+            <div class="reddit-comment">
+                <div class="reddit-thread-line"><div class="thread-line"></div></div>
+                <div class="reddit-comment-content">
+                    <div class="reddit-comment-meta"><span class="author">LowBalance4404</span> · 5h</div>
+                    <div class="reddit-comment-text">I'd say let it go, but that would be so hypocritical of me. My mom has a version of my childhood that did not happen. AT all. In my mom's version, it was all snowflakes, hugs, puppies, and unicorns and that is not the reality I lived.</div>
+                </div>
+            </div>
+
+            <div class="reddit-user-input">
+                <div class="persona-box reddit-persona">
+                    <strong>User Persona</strong>
+                    <div class="expandable" id="persona-reddit-1">
+                        <strong>Demographics:</strong> Works in family business related to gravestone/monument sales. Has personal experience with body image issues.<br><br>
+                        <strong>Interests:</strong> Relationship conflicts and interpersonal dynamics. Wedding-related drama and family conflicts. Financial exploitation and manipulation in relationships. Boundary violations and consent issues. Family dynamics involving toxic or manipulative behavior. Body image issues and eating disorders.<br><br>
+                        <strong>Values:</strong> Strong belief in personal boundaries and the right to enforce them. Zero tolerance for manipulation and exploitation. Advocates for cutting off toxic family members. Believes actions have consequences. Values honesty and transparency. Prioritizes self-protection over maintaining dysfunctional relationships.<br><br>
+                        <strong>Communication:</strong> Uses short, direct, declarative sentences with clear moral judgments. Employs emphatic repetition for emphasis. Frequently validates others' decisions. Uses conversational, informal language. Demonstrates empathy through personal connection. Maintains a protective, almost parental tone.
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpand('persona-reddit-1', this)">Show more</button>
+                </div>
+                <div class="reddit-ground-truth">
+                    <div class="ground-truth-label">Ground Truth Comment</div>
+                    <div class="reddit-comment-text">
+                        Your Mom has major issues. I'm speaking as a Mom of grown kids (who are all amazing in their own way), who was also shamed by my own Mom. I was just not what she wanted. I'm still not, but Im finally starting to live life on my own terms.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-divider"><span>Example 2</span></div>
+
+    <div class="reddit-card">
+        <div class="reddit-header">
+            <div class="reddit-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FF4500"/><circle cx="8.5" cy="10" r="1.5" fill="white"/><circle cx="15.5" cy="10" r="1.5" fill="white"/><path d="M7.5 14.5c0 0 2 2 4.5 2s4.5-2 4.5-2" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+            </div>
+            <span class="reddit-wordmark">reddit</span>
+            <span class="reddit-sub">r/AmItheAsshole</span>
+        </div>
+
+        <div class="reddit-post">
+            <div class="reddit-votes">
+                <div class="reddit-vote-btn">▲</div>
+                <div class="reddit-vote-count">•</div>
+                <div class="reddit-vote-btn">▼</div>
+            </div>
+            <div class="reddit-content">
+                <div class="reddit-meta">Posted by <a href="#">u/No_Writing9686</a> · 10h</div>
+                <div class="reddit-title">AITA for "losing" my passport to avoid babysitting on my vacation?</div>
+                <div class="reddit-body expandable" id="reddit-post-2">
+                    I (F17) still live at home. My sister (28) is married and has two kids (5/3). Whenever she comes over to visit my parents and her stick me with the kids. This wouldn't be a problem except she doesn't visit for an evening. She will come for a week. And for that week I'm an unpaid nanny.<br><br>
+                    My parents decided that since this was my last summer before I became an adult we would be going to Disneyland to celebrate my graduation. I asked who was going and they said it was just the three of us.<br><br>
+                    But when we got to the airport my sister and her family were there. Strangely enough they were also going to Disneyland. I went into my backpack and grabbed my passport. I put it in my sock.<br><br>
+                    When we got to the international security I couldn't find it. We looked everywhere. I had to Uber home and I missed my flight. Oh well. I get to stay home by myself for a week of peace and quiet.
+                </div>
+                <button class="expand-btn" onclick="toggleExpand('reddit-post-2', this)">Show more</button>
+                <div class="reddit-actions">
+                    <span class="reddit-action">Comments</span>
+                    <span class="reddit-action">Share</span>
+                    <span class="reddit-action">Save</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="reddit-comments">
+            <div class="reddit-comment">
+                <div class="reddit-thread-line"><div class="thread-line"></div></div>
+                <div class="reddit-comment-content">
+                    <div class="reddit-comment-meta"><span class="author">poorladlemonadestand</span> · 8h</div>
+                    <div class="reddit-comment-text">NTA. But if they posted on social media say "wait. I ruined the vacation because I was supposed to help with the kids or take care of them myself? So this wasn't about me?"</div>
+                </div>
+            </div>
+
+            <div class="reddit-user-input">
+                <div class="persona-box reddit-persona">
+                    <strong>User Persona</strong>
+                    <div class="expandable" id="persona-reddit-2">
+                        <strong>Interests:</strong> Family conflict resolution and interpersonal disputes. Stepfamily dynamics and blended family issues. Parental rights and child protection. Boundary violations and privacy issues. Teacher misconduct and educational system accountability. Documentation and evidence gathering for disputes.<br><br>
+                        <strong>Values:</strong> Strong protection of children's interests. Belief in documenting wrongdoing through evidence. Advocacy for escalation to authorities when necessary. Zero tolerance for manipulation and boundary violations. Support for holding people accountable. Belief in taking decisive action. Support for individuals standing up against family pressure.<br><br>
+                        <strong>Communication:</strong> Casual, direct writing style with frequent spelling irregularities. Inconsistent capitalization. Uses Reddit-specific abbreviations like 'Nta' and 'AH'. Brief, action-oriented responses. Employs imperative sentence structures. Tends to lead with strongest recommendation.
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpand('persona-reddit-2', this)">Show more</button>
+                </div>
+                <div class="reddit-ground-truth">
+                    <div class="ground-truth-label">Ground Truth Comment</div>
+                    <div class="reddit-comment-text">
+                        Good. now your dad needs to put both your mom and your sister in their places so this never happens again. Also find urgent appointments/study at the library every time your sister comes to the house with the kids and you weren't asked in advance and agreed to babysit. NTA and epic reaction. Kudos for standing up for yourself and stop enabling them.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

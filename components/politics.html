@@ -1,0 +1,229 @@
+<style>
+    .medium-container { max-width: 680px; }
+
+    .medium-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 32px;
+    }
+
+    .medium-logo {
+        font-family: Georgia, serif;
+        font-size: 26px;
+        font-weight: 400;
+        letter-spacing: -0.5px;
+    }
+
+    .medium-nav {
+        display: flex;
+        gap: 20px;
+        font-size: 13px;
+        color: var(--text-secondary);
+    }
+
+    .medium-article-title {
+        font-family: Georgia, serif;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.3px;
+        margin-bottom: 10px;
+    }
+
+    .medium-article-subtitle {
+        font-family: Georgia, serif;
+        font-size: 18px;
+        color: var(--text-secondary);
+        font-weight: 400;
+        line-height: 1.4;
+        margin-bottom: 20px;
+    }
+
+    .medium-author-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 24px;
+    }
+
+    .medium-author-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .medium-author-info {
+        font-size: 13px;
+    }
+
+    .medium-author-name {
+        font-weight: 500;
+    }
+
+    .medium-article-meta {
+        color: var(--text-secondary);
+        font-size: 12px;
+    }
+
+    .medium-body {
+        font-family: Georgia, serif;
+        font-size: 18px;
+        line-height: 1.8;
+    }
+
+    .medium-body p {
+        margin-bottom: 20px;
+    }
+
+    .medium-body .expandable:not(.expanded)::after {
+        background: linear-gradient(transparent, var(--bg));
+    }
+
+    .medium-responses {
+        border-top: 1px solid var(--border);
+        padding-top: 24px;
+        margin-top: 32px;
+    }
+
+    .medium-responses h4 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 16px;
+    }
+
+    .medium-persona {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+
+    .medium-ground-truth {
+        background: #ECFDF5;
+        border: 1px solid #A7F3D0;
+        border-left: 3px solid #10B981;
+        padding: 16px;
+    }
+
+    .medium-ground-truth .ground-truth-label {
+        color: #10B981;
+    }
+
+    .medium-response-text {
+        font-family: Georgia, serif;
+        font-size: 16px;
+        line-height: 1.7;
+    }
+</style>
+
+<div class="medium-container">
+    <div class="medium-header">
+        <div class="medium-logo">Medium</div>
+        <div class="medium-nav">
+            <span>Our story</span>
+            <span>Membership</span>
+            <span>Write</span>
+        </div>
+    </div>
+
+    <article>
+        <h2 class="medium-article-title">Possible Democratic Presidential Candidates are Grabbing the Headlines</h2>
+        <p class="medium-article-subtitle">Look for these familiar faces on the campaign trail</p>
+        <div class="medium-author-row">
+            <div class="medium-author-avatar" style="background: linear-gradient(135deg, #1A8917 0%, #2ECC71 100%);">CB</div>
+            <div class="medium-author-info">
+                <div class="medium-author-name">Caren Black</div>
+                <div class="medium-article-meta">Published in Political Thought · 12 min read · Feb 2025</div>
+            </div>
+        </div>
+        <div class="medium-body expandable" id="medium-post-1">
+            <p>The Democratic presidential hopefuls are starting their campaigns already. It may be too little too late if Trump cancels elections, including the 2028 presidential election. But let's pretend for a moment that these are normal times and the Democrats have lost a big election.</p>
+            <p>The first was California governor Gavin Newsom (D). God, it feels like he has been running for president forever, doesn't it? He's shaking things up, interviewing guests from across the political spectrum including Charlie Kirk and Steve Bannon. This started a firestorm among Democrats, but I think it was a smart move.</p>
+            <p>Rep. Alexandria Ocasio-Cortez (D-N.Y.) has been barnstorming through Arizona, Nevada and Colorado on a "Fighting Oligarchy" tour with Sen. Bernie Sanders (I-VT), drawing huge, dare I say Trump-sized, crowds. I've been a huge fan of AOC and the Squad since she was elected.</p>
+        </div>
+        <button class="expand-btn" onclick="toggleExpand('medium-post-1', this)">Show more</button>
+    </article>
+
+    <div class="medium-responses">
+        <h4>Responses</h4>
+        <div class="medium-persona">
+            <div class="medium-author-avatar" style="background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);">VM</div>
+            <div class="persona-box" style="flex: 1; margin-bottom: 0;">
+                <strong>User Persona</strong>
+                <div class="expandable" id="persona-politics-1">
+                    <strong>Demographics:</strong> Location: Oregon (Salem, OR mentioned). Occupation: US Marine, no longer on active duty. American. Physically campaigned for Bernie Sanders in New Hampshire primary 2016.<br><br>
+                    <strong>Interests:</strong> Progressive politics and Bernie Sanders advocacy. Trump legal troubles and accountability. Climate change and environmental policy. Abortion rights. Election integrity and voting systems. Gun control. Healthcare policy and Medicare for All.<br><br>
+                    <strong>Values:</strong> Strong progressive ideology with Bernie Sanders as preferred candidate. Intense opposition to Trump and MAGA movement. Climate action urgency. Support for reproductive rights. Advocacy for gun control. Support for universal healthcare. Anti-war stance based on military experience.<br><br>
+                    <strong>Communication:</strong> Casual, conversational tone with informal language. Frequent use of sarcasm and mockery. Brief, punchy responses. Employs rhetorical questions for effect. Uses crude humor. Direct, declarative sentences without hedging. Personal anecdotes to establish credibility.
+                </div>
+                <button class="expand-btn" onclick="toggleExpand('persona-politics-1', this)">Show more</button>
+            </div>
+        </div>
+        <div class="medium-ground-truth">
+            <div class="ground-truth-label">Ground Truth Comment</div>
+            <p class="medium-response-text">
+                I'm a Bernie Bro and realize he is too old to run for Prez. For me Gavin is too Hollywood and AOC needs more seasoning. Cory would be my choice if these are the only in the running. Michigan Gov Gretchen Whitmer would be my best choice.
+            </p>
+        </div>
+    </div>
+
+    <div class="example-divider"><span>Example 2</span></div>
+
+    <div class="medium-header">
+        <div class="medium-logo">Medium</div>
+        <div class="medium-nav">
+            <span>Our story</span>
+            <span>Membership</span>
+            <span>Write</span>
+        </div>
+    </div>
+
+    <article>
+        <h2 class="medium-article-title">How the U.S. Became Fascism's Greatest Success Story</h2>
+        <p class="medium-article-subtitle">Our 'land of the free' is collapsing into an autocratic nightmare</p>
+        <div class="medium-author-row">
+            <div class="medium-author-avatar" style="background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);">RK</div>
+            <div class="medium-author-info">
+                <div class="medium-author-name">Robert Krulwich</div>
+                <div class="medium-article-meta">Published in Political Analysis · 15 min read · Jun 2025</div>
+            </div>
+        </div>
+        <div class="medium-body expandable" id="medium-post-2">
+            <p>It's 2025, and 'the land of the free' is dead and gone. Kaput. The once-inspiring 'shining city on the hill' has vanished. So has the American dream of a wondrous 'land of opportunity.' These American attributes or ideals were never fully realized, sadly, but at least the promise was still there - until recently.</p>
+            <p>The reason the far-right takeover of the U.S. is fascism's greatest 'success story' is simple: the U.S. is both the world's foremost (former) bastion of democracy and by far the largest nation (population: 347,000,000) to ever succumb to autocratic fascism.</p>
+            <p>What made the U.S. a prime target for a fascist takeover? In my opinion, our super-individualism and its alter-ego, late-stage capitalism, paved the way and made U.S. fascism almost inevitable. Both systems are based on selfishness, greed, and endless competition.</p>
+        </div>
+        <button class="expand-btn" onclick="toggleExpand('medium-post-2', this)">Show more</button>
+    </article>
+
+    <div class="medium-responses">
+        <h4>Responses</h4>
+        <div class="medium-persona">
+            <div class="medium-author-avatar" style="background: linear-gradient(135deg, #DC2626 0%, #F87171 100%);">TA</div>
+            <div class="persona-box" style="flex: 1; margin-bottom: 0;">
+                <strong>User Persona</strong>
+                <div class="expandable" id="persona-politics-2">
+                    <strong>Interests:</strong> Trump administration policies and actions, repeatedly commenting on Trump's relationship with Putin and Russia. Russia-Ukraine conflict and military developments. NATO and international alliances. Geopolitical strategy and foreign policy. U.S. education system and critical thinking. Election integrity and democratic processes. Project 2025 and Republican policy agenda.<br><br>
+                    <strong>Values:</strong> Strong anti-Trump stance. Belief Trump is a Russian asset. Deep criticism of Republican Party. Patriotic concern for America's direction. Support for Ukraine. Value of education and critical thinking.<br><br>
+                    <strong>Communication:</strong> Direct and harsh language with strong emotional content. Frequent use of rhetorical questions for emphasis. Sarcastic and dismissive tone toward opposing views. Mix of brief agreements and longer analytical responses. Liberal use of exclamation points. Expresses gratitude for informative content.
+                </div>
+                <button class="expand-btn" onclick="toggleExpand('persona-politics-2', this)">Show more</button>
+            </div>
+        </div>
+        <div class="medium-ground-truth">
+            <div class="ground-truth-label">Ground Truth Comment</div>
+            <p class="medium-response-text">
+                The Supreme Court justice's are intelligent people so why is it that they seem to be completely blind to what is happening in the U.S.? Surely they can't believe that DT and the MAGAT's are the answers to our many real world problems. I have a degree in tax accounting and I also have an MBA and I have always thought that the U.S. brand of capitalism went too far. I have always felt that the "invisible hand of capitalism" was used to justify too many actions and decisions that were morally bankrupt. I believe we have our first through twelfth grade education system to blame for the fact that "most U.S. citizens seem too dumbed-down to fully grasp what's going on". So, if we ever have another Department of Education it is good that it will have to be re-built from the ground up. Let's just hope they don't make the same mistakes again.
+            </p>
+        </div>
+    </div>
+</div>

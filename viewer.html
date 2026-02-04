@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HumanLM | Data Viewer</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&family=Georgia&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --text: #1a1a1a;
+            --text-secondary: #666;
+            --accent: #e07a5f;
+            --bg: #fafafa;
+            --border: #e0e0e0;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* =============== NAVBAR =============== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 0 20px;
+        }
+
+        .navbar-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 52px;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .navbar-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .navbar-links a:hover,
+        .navbar-links a.active {
+            color: var(--accent);
+        }
+
+        /* =============== PAGE LAYOUT =============== */
+        .page-wrapper {
+            padding-top: 52px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* =============== HEADER =============== */
+        .page-header {
+            padding: 48px 0 32px;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* =============== TABS =============== */
+        .tabs-container {
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 32px;
+            overflow-x: auto;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 4px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: none;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: all 0.15s ease;
+        }
+
+        .tab:hover {
+            color: var(--text);
+        }
+
+        .tab.active {
+            color: var(--text);
+            border-bottom-color: var(--accent);
+        }
+
+        /* =============== CONTENT AREA =============== */
+        .content-area {
+            padding-bottom: 80px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* =============== SHARED COMPONENT STYLES =============== */
+        .example-divider {
+            margin: 48px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .example-divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .example-divider span {
+            background: var(--bg);
+            padding: 0 16px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+        }
+
+        .persona-box {
+            background: #FFFBEB;
+            border: 1px solid #FDE68A;
+            padding: 14px;
+            margin-bottom: 14px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .ground-truth {
+            background: #ECFDF5;
+            border-left: 3px solid #10B981;
+            padding: 14px;
+            margin-top: 14px;
+        }
+
+        .ground-truth-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #10B981;
+            margin-bottom: 10px;
+        }
+
+        .expandable {
+            max-height: 120px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .expandable:not(.expanded)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(transparent, var(--bg));
+            pointer-events: none;
+        }
+
+        .expandable.expanded {
+            max-height: none;
+        }
+
+        .expand-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 4px 0;
+        }
+
+        .expand-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* =============== FOOTER =============== */
+        .footer {
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            padding: 32px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* =============== RESPONSIVE =============== */
+        @media (max-width: 768px) {
+            .navbar-links {
+                gap: 16px;
+            }
+            .page-title {
+                font-size: 1.5rem;
+            }
+            .tab {
+            padding: 10px 14px;
+            font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="navbar-brand">HumanLM</a>
+            <div class="navbar-links">
+                <a href="index.html">Home</a>
+                <a href="viewer.html" class="active">Viewer</a>
+                <a href="#">Paper</a>
+                <a href="#" target="_blank">Code</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+    <div class="container">
+            <header class="page-header">
+                <h1 class="page-title">Data Viewer</h1>
+                <p class="page-subtitle">Explore user personas and ground-truth responses across different platforms</p>
+        </header>
+
+    <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab active" data-tab="news">News</button>
+                    <button class="tab" data-tab="book">Book</button>
+                    <button class="tab" data-tab="opinion">Opinion</button>
+                    <button class="tab" data-tab="politics">Politics</button>
+                    <button class="tab" data-tab="chat">Chat</button>
+                    <button class="tab" data-tab="email">Email</button>
+        </div>
+    </div>
+
+            <div class="content-area" id="content-area">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p style="margin-top: 12px;">Loading...</p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                Stanford University · New York University · Accenture<br>
+                <a href="mailto:shirwu@cs.stanford.edu">Shirley Wu</a> · <a href="mailto:jamesz@stanford.edu">James Zou</a>
+                    </div>
+                </div>
+    </footer>
+
+    <script>
+        // Tab state
+        let currentTab = 'news';
+        const contentCache = {};
+
+        // Load component HTML
+        async function loadComponent(name) {
+            const contentArea = document.getElementById('content-area');
+            
+            // Show loading
+            contentArea.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p style="margin-top: 12px;">Loading...</p>
+                            </div>
+            `;
+
+            // Check cache first
+            if (contentCache[name]) {
+                contentArea.innerHTML = contentCache[name];
+                initExpandButtons();
+                return;
+            }
+
+            try {
+                const response = await fetch(`components/${name}.html`);
+                if (!response.ok) throw new Error('Component not found');
+                const html = await response.text();
+                contentCache[name] = html;
+                contentArea.innerHTML = html;
+                initExpandButtons();
+            } catch (error) {
+                contentArea.innerHTML = `
+                    <div class="loading">
+                        <p>Failed to load component. Please try again.</p>
+                        </div>
+                `;
+            }
+        }
+
+        // Initialize expand/collapse buttons
+        function initExpandButtons() {
+            // Re-attach event listeners for expand buttons
+            document.querySelectorAll('.expand-btn').forEach(btn => {
+                btn.onclick = function() {
+                    const targetId = this.previousElementSibling?.id || 
+                                     this.closest('.persona-box')?.querySelector('.expandable')?.id ||
+                                     this.closest('.email-body-text')?.querySelector('.expandable')?.id;
+                    if (targetId) {
+                        toggleExpand(targetId, this);
+                    }
+                };
+            });
+        }
+
+        // Toggle expand/collapse
+        function toggleExpand(id, btn) {
+            const element = document.getElementById(id);
+            if (!element) return;
+            
+            element.classList.toggle('expanded');
+            if (btn) {
+                btn.textContent = element.classList.contains('expanded') ? 'Show less' : 'Show more';
+            }
+        }
+
+        // Make toggleExpand global for inline onclick handlers
+        window.toggleExpand = toggleExpand;
+
+        // Tab click handlers
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active state
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Load component
+                const tabName = tab.dataset.tab;
+                currentTab = tabName;
+                loadComponent(tabName);
+            });
+        });
+
+        // Load initial component
+        loadComponent('news');
+    </script>
+</body>
+</html>

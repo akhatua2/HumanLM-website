@@ -1,0 +1,200 @@
+<style>
+    .chat-container { max-width: 420px; margin: 0 auto; }
+
+    .chat-window {
+        background: #F2F2F7;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .chat-header {
+        background: #F9F9F9;
+        padding: 14px 18px;
+        text-align: center;
+        border-bottom: 1px solid #E5E5EA;
+    }
+
+    .chat-header h3 {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+
+    .chat-header span {
+        font-size: 11px;
+        color: var(--text-secondary);
+    }
+
+    .chat-messages {
+        padding: 18px;
+        min-height: 320px;
+    }
+
+    .chat-note {
+        text-align: center;
+        padding: 8px 14px;
+        margin-bottom: 10px;
+        background: rgba(0,0,0,0.04);
+        border-radius: 10px;
+        font-size: 11px;
+        color: var(--text-secondary);
+    }
+
+    .chat-timestamp {
+        text-align: center;
+        font-size: 10px;
+        color: var(--text-secondary);
+        margin: 14px 0;
+    }
+
+    .chat-message {
+        display: flex;
+        margin-bottom: 6px;
+    }
+
+    .chat-message.user { justify-content: flex-end; }
+    .chat-message.assistant { justify-content: flex-start; }
+
+    .chat-bubble {
+        max-width: 78%;
+        padding: 9px 14px;
+        border-radius: 18px;
+        font-size: 15px;
+        line-height: 1.4;
+    }
+
+    .chat-message.user .chat-bubble {
+        background: #007AFF;
+        color: white;
+        border-bottom-right-radius: 4px;
+    }
+
+    .chat-message.assistant .chat-bubble {
+        background: #E9E9EB;
+        color: var(--text);
+        border-bottom-left-radius: 4px;
+    }
+
+    .chat-bubble .expandable:not(.expanded)::after {
+        background: linear-gradient(transparent, #E9E9EB);
+    }
+
+    .chat-ground-truth {
+        margin-top: 18px;
+        padding-top: 18px;
+        border-top: 2px dashed #C7C7CC;
+    }
+
+    .chat-ground-truth-label {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .chat-ground-truth-label span {
+        background: #FFFBEB;
+        border: 1px solid #FDE68A;
+        padding: 5px 12px;
+        border-radius: 100px;
+        font-size: 10px;
+        font-weight: 600;
+        color: #92400E;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+
+    .chat-ground-truth .chat-bubble {
+        background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%);
+        color: #3730A3;
+        border: 2px solid #818CF8;
+    }
+</style>
+
+<div class="chat-container">
+    <div class="chat-window">
+        <div class="chat-header">
+            <h3>AI Assistant</h3>
+            <span>WildChat</span>
+        </div>
+        <div class="chat-messages">
+            <div class="chat-note">No persona information available for this dataset</div>
+            <div class="chat-timestamp">Hong Kong</div>
+            
+            <div class="chat-message user">
+                <div class="chat-bubble">how to use xcopy to update a folder files and remove the deleted files?</div>
+            </div>
+            <div class="chat-message assistant">
+                <div class="chat-bubble expandable" id="chat-response-1">
+                    To use xcopy to update a folder's files and remove the deleted files, follow these steps:<br><br>
+                    1. Open the Command Prompt by searching for "cmd" in the Start menu.<br>
+                    2. Navigate to the destination folder where you want to update the files.<br>
+                    3. Use the xcopy command with the appropriate options:<br><br>
+                    <code>xcopy &lt;source&gt; &lt;destination&gt; /D /E /H /Y</code><br><br>
+                    The options used here are:<br>
+                    /D copies only files that are newer in the source folder.<br>
+                    /E includes all subdirectories, including empty ones.<br>
+                    /H copies hidden and system files.<br>
+                    /Y suppresses the confirmation prompt.
+                </div>
+            </div>
+            <button class="expand-btn" onclick="toggleExpand('chat-response-1', this)" style="margin-bottom: 12px;">Show more</button>
+
+            <div class="chat-ground-truth">
+                <div class="chat-ground-truth-label">
+                    <span>Ground Truth: Next User Turn</span>
+                </div>
+                <div class="chat-message user">
+                    <div class="chat-bubble">I want to remove the deleted files too</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-divider"><span>Example 2</span></div>
+
+    <div class="chat-window">
+        <div class="chat-header">
+            <h3>AI Assistant</h3>
+            <span>WildChat</span>
+        </div>
+        <div class="chat-messages">
+            <div class="chat-note">No persona information available for this dataset</div>
+            <div class="chat-timestamp">Erbil, Iraq</div>
+
+            <div class="chat-message user">
+                <div class="chat-bubble">Hi there, I need your help to think about a project that is very unique and one of a kind! something that no one else has done before! something like the blockchain when it started! do you have any ideas?</div>
+            </div>
+            <div class="chat-message assistant">
+                <div class="chat-bubble expandable" id="chat-response-2a">
+                    Creating something wholly unique and groundbreaking like blockchain technology is a high aspiration. Here are a few areas and project ideas that could be as transformative:<br><br>
+                    1. Decentralized Internet: A project that ensures absolute data privacy, where users truly own their data and identity.<br><br>
+                    2. Quantum Cryptography for Mass Market: Developing quantum-secure communication tools that are as easy to use as WhatsApp or Signal.<br><br>
+                    3. AI Integrated with Human Brain: Creating an AI-driven neural interface that enhances cognitive functions in real-time.
+                </div>
+            </div>
+            <button class="expand-btn" onclick="toggleExpand('chat-response-2a', this)" style="margin-bottom: 12px;">Show more</button>
+
+            <div class="chat-message user">
+                <div class="chat-bubble">is there anything more like NFTs or cryptos that I can think of?</div>
+            </div>
+            <div class="chat-message assistant">
+                <div class="chat-bubble expandable" id="chat-response-2b">
+                    If you're specifically interested in digital assets similar to NFTs and cryptocurrencies, here are innovative ideas:<br><br>
+                    1. Self-Sovereign Identity Tokens: Digital identity that individuals control themselves.<br><br>
+                    2. DAOs for Physical Assets: Collectively owned real estate or renewable energy grids with decisions made via smart contracts.<br><br>
+                    3. Tokenized Ecosystem Services: A marketplace for carbon sequestration, water purification, and biodiversity.
+                </div>
+            </div>
+            <button class="expand-btn" onclick="toggleExpand('chat-response-2b', this)" style="margin-bottom: 12px;">Show more</button>
+
+            <div class="chat-ground-truth">
+                <div class="chat-ground-truth-label">
+                    <span>Ground Truth: Next User Turn</span>
+                </div>
+                <div class="chat-message user">
+                    <div class="chat-bubble">I like these ideas actually! but can you give me some more?</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

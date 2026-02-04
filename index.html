@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HumanLM: Simulating Users with State Alignment Beats Response Imitation">
+    <title>HumanLM</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --text: #1a1a1a;
+            --text-secondary: #666;
+            --accent: #e07a5f;
+            --bg: #fafafa;
+            --border: #e0e0e0;
+        }
+        
+        body {
+            font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.25rem 0;
+            background: var(--bg);
+            z-index: 100;
+        }
+        
+        nav .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav .logo {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        
+        nav .links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        nav .links a {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        nav .links a:hover {
+            color: var(--text);
+        }
+        
+        /* Main */
+        main {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+        
+        /* Hero */
+        .hero {
+            margin-bottom: 4rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+        }
+        
+        .hero h1 .highlight {
+            color: var(--accent);
+        }
+        
+        .hero .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero .links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        
+        .hero .links a {
+            font-size: 0.9rem;
+            color: var(--text);
+            text-decoration: none;
+            padding-bottom: 2px;
+            border-bottom: 1px solid var(--border);
+            transition: border-color 0.2s;
+        }
+        
+        .hero .links a:hover {
+            border-color: var(--text);
+        }
+        
+        /* Authors */
+        .authors {
+            margin-bottom: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .authors-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .authors-list {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            max-width: 700px;
+        }
+        
+        .authors-list a {
+            color: var(--text);
+            text-decoration: none;
+        }
+        
+        .authors-list a:hover {
+            text-decoration: underline;
+        }
+        
+        .authors-list sup {
+            font-size: 0.7em;
+            color: var(--text-secondary);
+        }
+        
+        .authors-note {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.75rem;
+        }
+        
+        /* Figure */
+        .figure {
+            margin-bottom: 4rem;
+        }
+        
+        .figure img {
+            width: 100%;
+            display: block;
+        }
+        
+        .figure figcaption {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            max-width: 600px;
+        }
+        
+        /* Abstract */
+        .abstract {
+            margin-bottom: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .abstract-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .abstract p {
+            font-size: 1rem;
+            line-height: 1.75;
+            max-width: 680px;
+            color: var(--text);
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        footer .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        footer .affiliation {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        footer .links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        footer .links a {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        
+        footer .links a:hover {
+            color: var(--text);
+        }
+        
+        /* Responsive */
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+            
+            nav .links {
+                gap: 1rem;
+            }
+            
+            nav .links a:not(:last-child) {
+                display: none;
+            }
+            
+            footer .container {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">HumanLM</a>
+            <div class="links">
+                <a href="#">Paper</a>
+                <a href="#">Code</a>
+                <a href="viewer.html">Viewer</a>
+                <a href="#">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <h1>Simulating Users with <span class="highlight">State Alignment</span> Beats Response Imitation</h1>
+            <p class="subtitle">
+                We build user simulators that accurately reflect real users by generating natural-language latent states aligned with ground-truth responses.
+            </p>
+            <div class="links">
+                <a href="#">Read the paper ↗</a>
+                <a href="#">View code ↗</a>
+                <a href="#">Try the demo ↗</a>
+            </div>
+        </section>
+
+        <section class="authors">
+            <div class="authors-label">Authors</div>
+            <div class="authors-list">
+                <a href="#">Shirley Wu</a><sup>*1</sup>, 
+                <a href="#">Evelyn Choi</a><sup>*1</sup>, 
+                <a href="#">Arpandeep Khatua</a><sup>*1</sup>, 
+                <a href="#">Zhanghan Wang</a><sup>2</sup>, 
+                <a href="#">Joy He-Yueya</a><sup>1</sup>, 
+                <a href="#">Tharindu Cyril Weerasooriya</a><sup>3</sup>, 
+                <a href="#">Wei Wei</a><sup>3</sup>, 
+                <a href="#">Diyi Yang</a><sup>1</sup>, 
+                <a href="#">Jure Leskovec</a><sup>†1</sup>, 
+                <a href="#">James Zou</a><sup>†1</sup>
+            </div>
+            <div class="authors-note">
+                <sup>1</sup>Stanford University · <sup>2</sup>New York University · <sup>3</sup>Accenture · <sup>*</sup>Equal contribution · <sup>†</sup>Equal supervision
+            </div>
+        </section>
+
+        <figure class="figure">
+            <img src="humanlm_overview_7.png" alt="HumanLM Framework Overview">
+            <figcaption>
+                Fig 1. HumanLM generates responses by first producing latent states (stance, emotion, communication style) that align with ground-truth user behavior, then synthesizing responses from these aligned states.
+            </figcaption>
+        </figure>
+
+        <section class="abstract">
+            <div class="abstract-label">Abstract</div>
+            <p>
+                Large Language Models are increasingly used to simulate how specific users respond to any context, enabling more user-centric applications. However, existing user simulators mostly imitate surface-level patterns and language styles, which fails to reflect the underlying state of real users. To address these limitations, we propose HumanLM, a novel training framework which builds user simulators that accurately reflect real users. Our key insight is that we generate natural-language latent states that align with the ground truth responses through reinforcement learning.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="affiliation">Stanford University · New York University · Accenture</div>
+            <div class="links">
+                <a href="#">arXiv</a>
+                <a href="#">GitHub</a>
+                <a href="#">BibTeX</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

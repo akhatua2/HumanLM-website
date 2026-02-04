@@ -1,0 +1,235 @@
+<style>
+    .yt-container { max-width: 720px; }
+
+    .yt-player {
+        background: #0f0f0f;
+        aspect-ratio: 16/9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .yt-play-btn {
+        width: 68px;
+        height: 48px;
+        background: #FF0000;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .yt-play-btn svg {
+        fill: white;
+        width: 20px;
+        height: 20px;
+        margin-left: 3px;
+    }
+
+    .yt-meta {
+        display: flex;
+        gap: 12px;
+        padding: 12px 0;
+    }
+
+    .yt-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #CC0000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 500;
+        font-size: 11px;
+        flex-shrink: 0;
+    }
+
+    .yt-info h3 {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.4;
+        margin-bottom: 4px;
+    }
+
+    .yt-channel {
+        font-family: 'Roboto', sans-serif;
+        font-size: 12px;
+        color: #606060;
+    }
+
+    .yt-transcript {
+        background: #F2F2F2;
+        padding: 12px;
+        margin: 12px 0;
+    }
+
+    .yt-transcript-header {
+        font-family: 'Roboto', sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .yt-transcript-text {
+        font-family: 'Roboto', sans-serif;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #030303;
+    }
+
+    .yt-transcript .expandable:not(.expanded)::after {
+        background: linear-gradient(transparent, #F2F2F2);
+    }
+
+    .yt-comments {
+        border-top: 1px solid #e5e5e5;
+        padding-top: 16px;
+        margin-top: 16px;
+    }
+
+    .yt-comments-header {
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 16px;
+    }
+
+    .yt-comment-box {
+        display: flex;
+        gap: 12px;
+    }
+
+    .yt-comment-content {
+        flex: 1;
+        font-family: 'Roboto', sans-serif;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .yt-comment-actions {
+        display: flex;
+        gap: 16px;
+        margin-top: 8px;
+        font-size: 12px;
+        color: #606060;
+    }
+</style>
+
+<div class="yt-container">
+    <div class="yt-player">
+        <div class="yt-play-btn">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+    </div>
+
+    <div class="yt-meta">
+        <div class="yt-avatar">BBC</div>
+        <div class="yt-info">
+            <h3>Scotland first in world to make period products free - BBC News</h3>
+            <div class="yt-channel">BBC News</div>
+        </div>
+    </div>
+
+    <div class="yt-transcript">
+        <div class="yt-transcript-header">Transcript</div>
+        <div class="yt-transcript-text expandable" id="transcript-1">
+            Scotland has become the first country in the world to make female sanitary products free it means the authorities have a legal duty to ensure items such as tampons and sanitary pads are available without charge to anyone who needs them. An historic vote years in the making the result of the vote on motion 20328 in the name of monica lennon is yes 121 there were no votes against there were no abstentions the motion is agreed and the period products free provision scotland bill is passed. Monica Lennon seeing out her vision with Scotland becoming the first country in the world to make period products free for anyone who needs them. Menstruation is normal free universal access to tampons pads and reusable options should be normal too period dignity for all isn't radical or extreme it's simply the right thing to do. Period poverty is an issue the world over women in both impoverished nations as well as those in developed countries unable to afford suitable sanitary products resorting to toilet paper socks and even newspaper it affects self-esteem and even keeps girls from school having a significant impact on their education.
+        </div>
+        <button class="expand-btn" onclick="toggleExpand('transcript-1', this)">Show more</button>
+    </div>
+
+    <div class="yt-comments">
+        <div class="yt-comments-header">Comments</div>
+        
+        <div class="yt-comment-box" style="margin-bottom: 16px;">
+            <div class="yt-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">UK</div>
+            <div class="yt-comment-content">
+                <div class="persona-box">
+                    <strong>User Persona</strong>
+                    <div class="expandable" id="persona-news-1">
+                        <strong>Demographics:</strong> UK-based, British nationality, previously resided in Japan.<br><br>
+                        <strong>Interests:</strong> UK politics and Brexit developments, particularly Boris Johnson's leadership and Brexit negotiations. International terrorism and military operations. British royal family news. Climate change debates and Greta Thunberg's activism. Scottish and Irish independence issues. Conspiracy theories, showing skepticism toward official narratives. International news events including natural disasters.<br><br>
+                        <strong>Values:</strong> Strong pro-Brexit stance, demanding immediate EU exit. Anti-establishment sentiment and skepticism toward politicians. Nationalist perspective. Support for Scottish independence. Libertarian attitude toward personal freedom. Appreciation for people 'forging their own path'. Nuanced thinking on complex issues. Pragmatic approach to political problems.<br><br>
+                        <strong>Communication:</strong> Frequent use of profanity and crude language. British slang and colloquialisms. Emoji usage for emphasis. Capitalization for emphasis. Pop culture references and humor. Casual, conversational tone with informal grammar. Direct, blunt expression of opinions. Sarcastic and sardonic tone when discussing political figures.
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpand('persona-news-1', this)">Show more</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="ground-truth">
+            <div class="yt-comment-box">
+                <div class="yt-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">UK</div>
+                <div class="yt-comment-content">
+                    <div class="ground-truth-label">Ground Truth Comment</div>
+                    <div class="yt-comment-text">Meanwhile in Westminster they're all still bickering about whether they should or should not give children in impoverished areas free school meals.</div>
+                    <div class="yt-comment-actions">
+                        <span>Like</span>
+                        <span>Reply</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-divider"><span>Example 2</span></div>
+
+    <div class="yt-player">
+        <div class="yt-play-btn">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+    </div>
+
+    <div class="yt-meta">
+        <div class="yt-avatar">BBC</div>
+        <div class="yt-info">
+            <h3>Australia fires: US crew dead in firefighting plane crash - BBC News</h3>
+            <div class="yt-channel">BBC News</div>
+        </div>
+    </div>
+
+    <div class="yt-transcript">
+        <div class="yt-transcript-header">Transcript</div>
+        <div class="yt-transcript-text expandable" id="transcript-2">
+            Three American firefighters have been killed while helping to battle Australia's bushfires authorities say they lost contact with an air tanker in southern New South Wales south of Canberra now those on board they had been helping firefighting efforts by dropping water over a large out-of-control bushfire here's the Commissioner of New South Wales from the Rural Fire Service it is still an active fire ground and and it did take some time with the use of ground crews and a number of aerial surveillance platforms to try and locate the wreckage of the plane an investigation is now underway. Air tankers large air tankers operations have now been suspended as police investigate what happened in the crash and the cause of the crash but yes another reminder of the very difficult conditions that have been happening and also of the fact that these fires are still blazing some of them out of control as we speak 70 fires burning in New South Wales 44 of those are not contained at the moment so even though there was a lull in the weather in the past few days the danger is yet not over in this bushfire season.
+        </div>
+        <button class="expand-btn" onclick="toggleExpand('transcript-2', this)">Show more</button>
+    </div>
+
+    <div class="yt-comments">
+        <div class="yt-comments-header">Comments</div>
+        
+        <div class="yt-comment-box" style="margin-bottom: 16px;">
+            <div class="yt-avatar" style="background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);">CA</div>
+            <div class="yt-comment-content">
+                <div class="persona-box">
+                    <strong>User Persona</strong>
+                    <div class="expandable" id="persona-news-2">
+                        <strong>Demographics:</strong> California, USA. American nationality.<br><br>
+                        <strong>Interests:</strong> US politics and Trump administration activities. International politics, particularly Brexit developments. Aviation safety and firefighting equipment, demonstrating technical knowledge. Coronavirus pandemic response and public health policy. Economic issues and wealth inequality. Government accountability and transparency. Workers' rights and corporate responsibility.<br><br>
+                        <strong>Values:</strong> Strong opposition to nepotism and unqualified appointments. Belief in government accountability. Support for workers' rights and fair corporate taxation. Advocacy for public health measures. Concern for worker safety, praising firefighters. Preference for evidence-based policy and competent crisis management.<br><br>
+                        <strong>Communication:</strong> Frequent use of derogatory nicknames for political figures. Heavy use of mockery. Short, punchy sentences with strong emotional content. Extensive use of sarcasm. Occasional longer, more detailed responses when discussing technical topics like aviation safety.
+                    </div>
+                    <button class="expand-btn" onclick="toggleExpand('persona-news-2', this)">Show more</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="ground-truth" style="background: #EFF6FF; border-left-color: #3B82F6;">
+            <div class="yt-comment-box">
+                <div class="yt-avatar" style="background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);">CA</div>
+                <div class="yt-comment-content">
+                    <div class="ground-truth-label" style="color: #1D4ED8;">Ground Truth Comment</div>
+                    <div class="yt-comment-text">Before the US Forestry Service stopped using them due to the same reasons, the pilots were well aware of the dangers. They called them flying death traps. Unfortunately the "can-do" willingness of the firefighters and pilots made it so they risked their lives more than they should've. Also they knew of stress fractures in the planes structures AND STILL FLEW THEM! True heroes doing the best they could with horrible equipment.</div>
+                    <div class="yt-comment-actions">
+                        <span>Like</span>
+                        <span>Reply</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

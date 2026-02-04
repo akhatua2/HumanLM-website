@@ -1,0 +1,302 @@
+<style>
+    .email-container { max-width: 800px; }
+
+    .outlook-window {
+        background: white;
+        border: 1px solid #E1DFDD;
+        overflow: hidden;
+    }
+
+    .outlook-toolbar {
+        background: #0078D4;
+        padding: 8px 14px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .outlook-logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: white;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .outlook-logo svg {
+        width: 18px;
+        height: 18px;
+        fill: white;
+    }
+
+    .outlook-tabs {
+        display: flex;
+        gap: 4px;
+        margin-left: 20px;
+    }
+
+    .outlook-tab {
+        padding: 5px 12px;
+        color: rgba(255,255,255,0.8);
+        font-size: 12px;
+    }
+
+    .outlook-tab.active {
+        background: rgba(255,255,255,0.2);
+        color: white;
+    }
+
+    .outlook-body {
+        display: flex;
+        min-height: 380px;
+    }
+
+    .outlook-sidebar {
+        width: 160px;
+        background: #F3F2F1;
+        border-right: 1px solid #E1DFDD;
+        padding: 10px;
+    }
+
+    .folder-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        font-size: 13px;
+        color: var(--text);
+        cursor: pointer;
+    }
+
+    .folder-item:hover { background: #E1DFDD; }
+    .folder-item.active { background: #E1DFDD; font-weight: 600; }
+    .folder-icon { width: 18px; text-align: center; font-size: 12px; }
+
+    .outlook-main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .email-thread-header {
+        padding: 14px 20px;
+        border-bottom: 1px solid #E1DFDD;
+    }
+
+    .email-subject {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+
+    .email-participants {
+        font-size: 12px;
+        color: var(--text-secondary);
+    }
+
+    .email-thread-content {
+        flex: 1;
+        padding: 16px 20px;
+        overflow-y: auto;
+    }
+
+    .email-message {
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #F3F2F1;
+    }
+
+    .email-message:last-child { border-bottom: none; }
+
+    .email-message-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+
+    .email-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+
+    .email-sender-info { flex: 1; }
+    .email-sender-name { font-weight: 600; font-size: 13px; }
+    .email-sender-address { font-size: 11px; color: var(--text-secondary); }
+    .email-timestamp { font-size: 11px; color: var(--text-secondary); }
+
+    .email-body-text {
+        font-size: 13px;
+        line-height: 1.6;
+        padding-left: 46px;
+    }
+
+    .email-body-text p { margin-bottom: 8px; }
+
+    .email-body-text .expandable:not(.expanded)::after {
+        background: linear-gradient(transparent, white);
+    }
+
+    .email-ground-truth {
+        background: #EFF6FF;
+        border: 1px solid #BFDBFE;
+        border-left: 3px solid #0078D4;
+        padding: 14px;
+        margin-top: 14px;
+    }
+
+    .email-ground-truth .ground-truth-label {
+        color: #0078D4;
+    }
+
+    .email-ground-truth .email-body-text {
+        padding-left: 0;
+    }
+
+    @media (max-width: 768px) {
+        .outlook-sidebar { display: none; }
+    }
+</style>
+
+<div class="email-container">
+    <div class="outlook-window">
+        <div class="outlook-toolbar">
+            <div class="outlook-logo">
+                <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.27 5.1 7.63 12 4.18zM4 16.54V9.09l7 3.5v7.45l-7-3.5zm9 3.5v-7.45l7-3.5v7.45l-7 3.5z"/></svg>
+                Outlook
+            </div>
+            <div class="outlook-tabs">
+                <span class="outlook-tab active">Mail</span>
+                <span class="outlook-tab">Calendar</span>
+                <span class="outlook-tab">People</span>
+            </div>
+        </div>
+        <div class="outlook-body">
+            <div class="outlook-sidebar">
+                <div class="folder-item active"><span class="folder-icon">▼</span>Inbox</div>
+                <div class="folder-item"><span class="folder-icon">▷</span>Sent Items</div>
+                <div class="folder-item"><span class="folder-icon">▷</span>Drafts</div>
+            </div>
+            <div class="outlook-main">
+                <div class="email-thread-header">
+                    <div class="email-subject">Re: Ski Trip Planning - Jan 10-14th</div>
+                    <div class="email-participants">Ross Berthelot → Group</div>
+                </div>
+                <div class="email-thread-content">
+                    <div class="email-message">
+                        <div class="email-message-header">
+                            <div class="email-avatar" style="background: linear-gradient(135deg, #0078D4 0%, #00BCF2 100%);">RB</div>
+                            <div class="email-sender-info">
+                                <div class="email-sender-name">Ross Berthelot</div>
+                                <div class="email-sender-address">ross_berthelot@bankone.com</div>
+                            </div>
+                            <div class="email-timestamp">Dec 2001</div>
+                        </div>
+                        <div class="email-body-text">
+                            <div class="expandable" id="email-thread-1">
+                                <p>Lenny! jumping in the conversation without missing a beat....good to have you with us. Nice comedy....but the only fat, bald 30 year old is the Dogger. (just kidding dog, you's not fat....you's just fluffy). Don is bald, but not fat. Roby is balding, but just a little "stocky". Clint has a belly, but is not balding. Other than that, we are all pretty normal (please use that term loosely).</p>
+                                <p>Your parents would love to have us at their crib. Dog could rummage through all of your belongings, eat all of your parents' food, and wake them up at the ass crack of dawn with scrambled eggs and jumby.</p>
+                                <p>Porthole....see if Timmy, Tricia, Mike Thomas, etc. would be interested in going on the trip...Lenny....see about all of your Houston Fiji buddies (house bitch, Tim, Val, etc.). Tell Tim we'll let him bring his new wife with him, too.</p>
+                                <p>Anyone else we can think of who might be interested in this trip (Jan 10 - 14th)?</p>
+                            </div>
+                            <button class="expand-btn" onclick="toggleExpand('email-thread-1', this)">Show more</button>
+                        </div>
+                    </div>
+
+                    <div class="email-ground-truth">
+                        <div class="persona-box" style="margin-bottom: 12px;">
+                            <strong>Responder Profile</strong>
+                            <div class="expandable" id="persona-email-1">
+                                <strong>Demographics:</strong> Works at Enron, involved in hiring.<br><br>
+                                <strong>Interests:</strong> Social gatherings and weekend activities. Travel and destination events. Nightlife and entertainment. Sports, particularly hockey. Shooting range activities. Crawfish boils and regional food culture. Austin entertainment scene. Wedding planning and social events.<br><br>
+                                <strong>Values:</strong> Cost-consciousness in decision making. Maintaining personal relationships. Helping friends with career opportunities. Openness to new experiences. Appreciation for laid-back atmospheres. Prioritizing social experiences and fun. Direct and honest communication.<br><br>
+                                <strong>Communication:</strong> Consistently uses lowercase letters, even at sentence beginnings. Casual and conversational tone throughout. Short, direct sentences. Uses informal expressions and slang. Minimal punctuation. Uses contractions frequently.
+                            </div>
+                            <button class="expand-btn" onclick="toggleExpand('persona-email-1', this)">Show more</button>
+                        </div>
+                        <div class="ground-truth-label">Ground Truth Reply</div>
+                        <div class="email-body-text" style="padding-left: 0;">
+                            <p>thanks for including me. i don't think i will be able to make a ski trip durning that period. i have to go to miami and party on south beach. sorry. maybe if something was scheduled around spring skiing (feb-mar) i could definately go.</p>
+                            <p>robicheaux is bald? i remember that bastard was so hairy when i was living with him. i used to have to shave the soap in the shower after he used it.</p>
+                            <p>i know some of the houston guys would like to go skiing so keep us informed.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-divider"><span>Example 2</span></div>
+
+    <div class="outlook-window">
+        <div class="outlook-toolbar">
+            <div class="outlook-logo">
+                <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.27 5.1 7.63 12 4.18zM4 16.54V9.09l7 3.5v7.45l-7-3.5zm9 3.5v-7.45l7-3.5v7.45l-7 3.5z"/></svg>
+                Outlook
+            </div>
+            <div class="outlook-tabs">
+                <span class="outlook-tab active">Mail</span>
+                <span class="outlook-tab">Calendar</span>
+                <span class="outlook-tab">People</span>
+            </div>
+        </div>
+        <div class="outlook-body">
+            <div class="outlook-sidebar">
+                <div class="folder-item active"><span class="folder-icon">▼</span>Inbox</div>
+                <div class="folder-item"><span class="folder-icon">▷</span>Sent Items</div>
+                <div class="folder-item"><span class="folder-icon">▷</span>Drafts</div>
+            </div>
+            <div class="outlook-main">
+                <div class="email-thread-header">
+                    <div class="email-subject">Holiday Wishes</div>
+                    <div class="email-participants">Candice Kao → Vince</div>
+                </div>
+                <div class="email-thread-content">
+                    <div class="email-message">
+                        <div class="email-message-header">
+                            <div class="email-avatar" style="background: linear-gradient(135deg, #5436DA 0%, #8B5CF6 100%);">CK</div>
+                            <div class="email-sender-info">
+                                <div class="email-sender-name">Candice Kao</div>
+                                <div class="email-sender-address">cgkao@mtholyoke.edu</div>
+                            </div>
+                            <div class="email-timestamp">Dec 2001</div>
+                        </div>
+                        <div class="email-body-text" style="padding-left: 46px;">
+                            <p>Hi Vince,</p>
+                            <p>How are you? I hope you are doing well. I understand that Enron has been facing many difficulties but I hope the group and everyone else is doing alright. Well, i just wanted to wish you and your family a safe and happy holiday.</p>
+                            <p>Sincerely,<br>Candice Kao</p>
+                        </div>
+                    </div>
+
+                    <div class="email-ground-truth">
+                        <div class="persona-box" style="margin-bottom: 12px;">
+                            <strong>Responder Profile</strong>
+                            <div class="expandable" id="persona-email-2">
+                                <strong>Demographics:</strong> Male (referred to as 'Vince'). Location: Houston. Senior Manager/Executive at Enron. Has administrative support.<br><br>
+                                <strong>Interests:</strong> Human resources and employee classification decisions. Personnel review and ranking processes. Risk management and algorithmic solutions. MBA recruitment and university relations. Technical presentations and learning. Professional networking and vendor relationships. Analyst and associate programs.<br><br>
+                                <strong>Values:</strong> Efficiency and brevity in communication. Proper delegation and organizational hierarchy. Decisiveness in management. Professional courtesy and gratitude. Humility and self-awareness. Accessibility to external partners. Continuous learning and development.<br><br>
+                                <strong>Communication:</strong> Extremely concise responses averaging 10-15 words per message. Consistent single-word signature 'Vince' without title. Direct, declarative statements without elaboration. Action-oriented language with clear directives. Professional but warm tone. Minimal use of punctuation and formatting. Frequent use of gratitude expressions.
+                            </div>
+                            <button class="expand-btn" onclick="toggleExpand('persona-email-2', this)">Show more</button>
+                        </div>
+                        <div class="ground-truth-label">Ground Truth Reply</div>
+                        <div class="email-body-text" style="padding-left: 0;">
+                            <p>Candice,</p>
+                            <p>Thanks a lot. So far, we are intact as a group but not for long. The best holiday wishes to you and your family.</p>
+                            <p>Vince</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
