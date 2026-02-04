@@ -94,7 +94,6 @@
             line-height: 1.15;
             letter-spacing: -0.03em;
             margin-bottom: 1.5rem;
-            max-width: 700px;
         }
         
         .hero h1 .highlight {
@@ -104,28 +103,40 @@
         .hero .subtitle {
             font-size: 1.125rem;
             color: var(--text-secondary);
-            max-width: 600px;
             margin-bottom: 2rem;
         }
         
         .hero .links {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             flex-wrap: wrap;
             margin-bottom: 3rem;
         }
         
         .hero .links a {
             font-size: 0.9rem;
+            font-weight: 500;
             color: var(--text);
             text-decoration: none;
-            padding-bottom: 2px;
-            border-bottom: 1px solid var(--border);
-            transition: border-color 0.2s;
+            padding: 10px 20px;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .hero .links a:hover {
             border-color: var(--text);
+            background: var(--bg);
+            transform: translateY(-1px);
+        }
+        
+        .hero .links a svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
         }
         
         /* Authors */
@@ -147,7 +158,6 @@
         .authors-list {
             font-size: 0.95rem;
             line-height: 1.8;
-            max-width: 700px;
         }
         
         .authors-list a {
@@ -185,7 +195,6 @@
             font-size: 0.75rem;
             color: var(--text-secondary);
             margin-top: 1rem;
-            max-width: 600px;
         }
         
         /* Abstract */
@@ -207,13 +216,11 @@
         .abstract p {
             font-size: 1rem;
             line-height: 1.75;
-            max-width: 680px;
             color: var(--text);
         }
         
         /* Footer */
         footer {
-            border-top: 1px solid var(--border);
             padding: 2rem 0;
             margin-top: 2rem;
         }
@@ -231,6 +238,26 @@
             font-family: 'IBM Plex Mono', monospace;
             font-size: 0.75rem;
             color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        footer .affiliation .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        footer .affiliation .logo img {
+            height: 14px;
+            width: auto;
+            vertical-align: middle;
+        }
+        
+        footer .affiliation .separator {
+            margin: 0 0.5rem;
         }
         
         footer .links {
@@ -267,19 +294,23 @@
                 gap: 1rem;
                 text-align: center;
             }
+            
+            footer .affiliation {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="container">
+    <div class="container">
             <a href="#" class="logo">HumanLM</a>
             <div class="links">
-                <a href="#">Paper</a>
+                <a href="paper.html">Paper</a>
                 <a href="#">Code</a>
                 <a href="viewer.html">Viewer</a>
-                <a href="#">Blog</a>
+                <a href="blog.html">Blog</a>
             </div>
         </div>
     </nav>
@@ -291,10 +322,37 @@
                 We build user simulators that accurately reflect real users by generating natural-language latent states aligned with ground-truth responses.
             </p>
             <div class="links">
-                <a href="#">Read the paper ↗</a>
-                <a href="#">View code ↗</a>
-                <a href="#">Try the demo ↗</a>
+                <a href="#">
+                    <img src="logos/arxiv.svg" alt="arXiv" style="width: 16px; height: 16px;">
+                    Read the paper
+                </a>
+                <a href="#">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    View code
+                </a>
+                <a href="viewer.html">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                    </svg>
+                    Data
+                </a>
             </div>
+        </section>
+
+        <figure class="figure">
+            <img src="humanlm_overview_7.png" alt="HumanLM Framework Overview">
+            <figcaption>
+                Fig 1. HumanLM generates responses by first producing latent states (stance, emotion, communication style) that align with ground-truth user behavior, then synthesizing responses from these aligned states.
+            </figcaption>
+        </figure>
+
+        <section class="abstract">
+            <div class="abstract-label">Abstract</div>
+            <p>
+                Large Language Models are increasingly used to simulate how specific users respond to any context, enabling more user-centric applications. However, existing user simulators mostly imitate surface-level patterns and language styles, which fails to reflect the underlying state of real users. To address these limitations, we propose HumanLM, a novel training framework which builds user simulators that accurately reflect real users. Our key insight is that we generate natural-language latent states that align with the ground truth responses through reinforcement learning.
+            </p>
         </section>
 
         <section class="authors">
@@ -315,25 +373,17 @@
                 <sup>1</sup>Stanford University · <sup>2</sup>New York University · <sup>3</sup>Accenture · <sup>*</sup>Equal contribution · <sup>†</sup>Equal supervision
             </div>
         </section>
-
-        <figure class="figure">
-            <img src="humanlm_overview_7.png" alt="HumanLM Framework Overview">
-            <figcaption>
-                Fig 1. HumanLM generates responses by first producing latent states (stance, emotion, communication style) that align with ground-truth user behavior, then synthesizing responses from these aligned states.
-            </figcaption>
-        </figure>
-
-        <section class="abstract">
-            <div class="abstract-label">Abstract</div>
-            <p>
-                Large Language Models are increasingly used to simulate how specific users respond to any context, enabling more user-centric applications. However, existing user simulators mostly imitate surface-level patterns and language styles, which fails to reflect the underlying state of real users. To address these limitations, we propose HumanLM, a novel training framework which builds user simulators that accurately reflect real users. Our key insight is that we generate natural-language latent states that align with the ground truth responses through reinforcement learning.
-            </p>
-        </section>
     </main>
 
     <footer>
         <div class="container">
-            <div class="affiliation">Stanford University · New York University · Accenture</div>
+            <div class="affiliation">
+                <span class="logo">Stanford University<img src="logos/stanford.png" alt="Stanford"></span>
+                <span class="separator">·</span>
+                <span class="logo">New York University<img src="logos/nyu.png" alt="NYU"></span>
+                <span class="separator">·</span>
+                <span class="logo">Accenture<img src="logos/accenture.png" alt="Accenture"></span>
+            </div>
             <div class="links">
                 <a href="#">arXiv</a>
                 <a href="#">GitHub</a>

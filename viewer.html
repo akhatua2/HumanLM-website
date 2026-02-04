@@ -25,53 +25,59 @@
         }
 
         /* =============== NAVBAR =============== */
-        .navbar {
+        nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: white;
-            border-bottom: 1px solid var(--border);
+            padding: 1.25rem 0;
+            background: #fff;
             z-index: 1000;
-            padding: 0 20px;
         }
-
-        .navbar-inner {
-            max-width: 1000px;
+        
+        nav .container {
+            max-width: 960px;
             margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            height: 52px;
+            align-items: center;
         }
-
-        .navbar-brand {
+        
+        nav .logo {
             font-weight: 600;
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--text);
             text-decoration: none;
+            letter-spacing: -0.02em;
         }
-
-        .navbar-links {
+        
+        nav .links {
             display: flex;
-            gap: 24px;
+            gap: 2rem;
+            align-items: center;
         }
-
-        .navbar-links a {
+        
+        nav .links a {
+            font-size: 0.875rem;
             color: var(--text-secondary);
             text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
+            transition: color 0.2s;
+        }
+        
+        nav .links a:hover {
+            color: var(--text);
+            background: transparent !important;
         }
 
-        .navbar-links a:hover,
-        .navbar-links a.active {
-            color: var(--accent);
+        nav .links a.active {
+            color: var(--text);
+            font-weight: 500;
         }
 
         /* =============== PAGE LAYOUT =============== */
         .page-wrapper {
-            padding-top: 52px;
+            padding-top: 60px;
         }
 
         .container {
@@ -98,36 +104,53 @@
 
         /* =============== TABS =============== */
         .tabs-container {
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 32px;
+            position: sticky;
+            top: 56px;
+            background: #fff;
+            margin-bottom: 24px;
             overflow-x: auto;
+            z-index: 100;
+            padding: 12px 0;
         }
 
         .tabs {
             display: flex;
-            gap: 4px;
+            gap: 8px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            justify-content: center;
         }
 
         .tab {
-            padding: 12px 20px;
-            font-size: 13px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
             font-weight: 500;
-            color: var(--text-secondary);
+            color: var(--text);
             background: none;
-            border: none;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
             cursor: pointer;
             white-space: nowrap;
-            border-bottom: 2px solid transparent;
-            transition: all 0.15s ease;
+            transition: all 0.2s ease;
         }
 
         .tab:hover {
-            color: var(--text);
+            border-color: var(--text);
+            background: var(--bg);
+            transform: translateY(-1px);
         }
 
         .tab.active {
-            color: var(--text);
-            border-bottom-color: var(--accent);
+            color: white;
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .tab.active:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            opacity: 0.9;
         }
 
         /* =============== CONTENT AREA =============== */
@@ -245,26 +268,61 @@
         }
 
         /* =============== FOOTER =============== */
-        .footer {
-            background: var(--bg);
-            border-top: 1px solid var(--border);
-            padding: 32px 0;
-            text-align: center;
+        footer {
+            padding: 2rem 0;
+            margin-top: 2rem;
+            background: #fff !important;
         }
-
-        .footer-content {
-            font-size: 13px;
+        
+        footer .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        footer .affiliation {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
             color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }
-
-        .footer a {
+        
+        footer .affiliation .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        footer .affiliation .logo img {
+            height: 14px;
+            width: auto;
+            vertical-align: middle;
+        }
+        
+        footer .affiliation .separator {
+            margin: 0 0.5rem;
+        }
+        
+        footer .links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        footer .links a {
+            font-size: 0.8rem;
             color: var(--text-secondary);
             text-decoration: none;
         }
-
-        .footer a:hover {
-            color: var(--accent);
-            text-decoration: underline;
+        
+        footer .links a:hover {
+            color: var(--text);
+            background: transparent !important;
         }
 
         /* =============== RESPONSIVE =============== */
@@ -278,41 +336,48 @@
             .tab {
             padding: 10px 14px;
             font-size: 12px;
+        }
+        }
+
+        @media (max-width: 640px) {
+            footer .container {
+                flex-direction: column;
+                gap: 1rem;
+            text-align: center;
+            }
+            
+            footer .affiliation {
+            justify-content: center;
             }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-inner">
-            <a href="index.html" class="navbar-brand">HumanLM</a>
-            <div class="navbar-links">
-                <a href="index.html">Home</a>
+    <nav>
+    <div class="container">
+            <a href="index.html" class="logo">HumanLM</a>
+            <div class="links">
+                <a href="paper.html">Paper</a>
+                <a href="#">Code</a>
                 <a href="viewer.html" class="active">Viewer</a>
-                <a href="#">Paper</a>
-                <a href="#" target="_blank">Code</a>
-            </div>
+                <a href="blog.html">Blog</a>
+    </div>
         </div>
     </nav>
 
     <div class="page-wrapper">
-    <div class="container">
-            <header class="page-header">
-                <h1 class="page-title">Data Viewer</h1>
-                <p class="page-subtitle">Explore user personas and ground-truth responses across different platforms</p>
-        </header>
-
     <div class="tabs-container">
-                <div class="tabs">
-                    <button class="tab active" data-tab="news">News</button>
-                    <button class="tab" data-tab="book">Book</button>
-                    <button class="tab" data-tab="opinion">Opinion</button>
-                    <button class="tab" data-tab="politics">Politics</button>
-                    <button class="tab" data-tab="chat">Chat</button>
-                    <button class="tab" data-tab="email">Email</button>
+            <div class="tabs">
+                <button class="tab active" data-tab="news">Humanual-News</button>
+                <button class="tab" data-tab="book">Humanual-Book</button>
+                <button class="tab" data-tab="opinion">Humanual-Opinion</button>
+                <button class="tab" data-tab="politics">Humanual-Politics</button>
+                <button class="tab" data-tab="chat">Humanual-Chat</button>
+                <button class="tab" data-tab="email">Humanual-Email</button>
         </div>
     </div>
 
+        <div class="container">
             <div class="content-area" id="content-area">
                 <div class="loading">
                     <div class="loading-spinner"></div>
@@ -322,19 +387,46 @@
                     </div>
                 </div>
 
-    <footer class="footer">
+    <footer>
         <div class="container">
-            <div class="footer-content">
-                Stanford University · New York University · Accenture<br>
-                <a href="mailto:shirwu@cs.stanford.edu">Shirley Wu</a> · <a href="mailto:jamesz@stanford.edu">James Zou</a>
+            <div class="affiliation">
+                <span class="logo">Stanford University<img src="logos/stanford.png" alt="Stanford"></span>
+                <span class="separator">·</span>
+                <span class="logo">New York University<img src="logos/nyu.png" alt="NYU"></span>
+                <span class="separator">·</span>
+                <span class="logo">Accenture<img src="logos/accenture.png" alt="Accenture"></span>
                     </div>
+            <div class="links">
+                <a href="#">arXiv</a>
+                <a href="#">GitHub</a>
+                <a href="#">BibTeX</a>
                 </div>
+                                </div>
     </footer>
 
     <script>
         // Tab state
         let currentTab = 'news';
         const contentCache = {};
+        
+        // Carousel state
+        let currentExampleIndex = 0;
+        let totalExamples = 0;
+
+        // Get initial tab from URL hash
+        function getInitialTab() {
+            const hash = window.location.hash.substring(1); // Remove the #
+            const validTabs = ['news', 'book', 'opinion', 'politics', 'chat', 'email'];
+            if (hash && validTabs.includes(hash)) {
+                return hash;
+            }
+            return 'news'; // Default to news
+        }
+
+        // Update URL hash when tab changes
+        function updateURLHash(tabName) {
+            window.location.hash = tabName;
+        }
 
         // Load component HTML
         async function loadComponent(name) {
@@ -345,13 +437,14 @@
                 <div class="loading">
                     <div class="loading-spinner"></div>
                     <p style="margin-top: 12px;">Loading...</p>
-                            </div>
+                                </div>
             `;
 
             // Check cache first
             if (contentCache[name]) {
                 contentArea.innerHTML = contentCache[name];
                 initExpandButtons();
+                initCarousel();
                 return;
             }
 
@@ -362,14 +455,57 @@
                 contentCache[name] = html;
                 contentArea.innerHTML = html;
                 initExpandButtons();
+                initCarousel();
             } catch (error) {
                 contentArea.innerHTML = `
                     <div class="loading">
                         <p>Failed to load component. Please try again.</p>
-                        </div>
+                    </div>
                 `;
             }
         }
+        
+        // Initialize carousel navigation
+        function initCarousel() {
+            const slides = document.querySelectorAll('.example-slide');
+            if (slides.length === 0) return;
+            
+            totalExamples = slides.length;
+            currentExampleIndex = 0;
+            
+            // Ensure first slide is active
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === 0);
+            });
+            
+            // Attach button listeners
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (prevBtn) {
+                prevBtn.onclick = () => changeExample(-1);
+            }
+            if (nextBtn) {
+                nextBtn.onclick = () => changeExample(1);
+            }
+        }
+        
+        // Change example slide
+        function changeExample(direction) {
+            const slides = document.querySelectorAll('.example-slide');
+            if (slides.length === 0) return;
+            
+            slides[currentExampleIndex].classList.remove('active');
+            
+            currentExampleIndex += direction;
+            if (currentExampleIndex < 0) currentExampleIndex = totalExamples - 1;
+            if (currentExampleIndex >= totalExamples) currentExampleIndex = 0;
+            
+            slides[currentExampleIndex].classList.add('active');
+        }
+        
+        // Make changeExample global
+        window.changeExample = changeExample;
 
         // Initialize expand/collapse buttons
         function initExpandButtons() {
@@ -400,22 +536,54 @@
         // Make toggleExpand global for inline onclick handlers
         window.toggleExpand = toggleExpand;
 
+        // Switch to a specific tab
+        function switchToTab(tabName) {
+            currentTab = tabName;
+            
+            // Update active state
+            document.querySelectorAll('.tab').forEach(tab => {
+                if (tab.dataset.tab === tabName) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Update URL hash
+            updateURLHash(tabName);
+            
+            // Load component
+            loadComponent(tabName);
+        }
+
         // Tab click handlers
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => {
-                // Update active state
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                
-                // Load component
                 const tabName = tab.dataset.tab;
-                currentTab = tabName;
-                loadComponent(tabName);
+                switchToTab(tabName);
+                });
             });
+
+        // Handle hash changes (back/forward buttons, manual URL changes)
+        window.addEventListener('hashchange', () => {
+            const tabFromHash = getInitialTab();
+            if (tabFromHash !== currentTab) {
+                switchToTab(tabFromHash);
+            }
         });
 
-        // Load initial component
-        loadComponent('news');
+        // Initialize tab from URL hash on page load
+        // Use DOMContentLoaded to ensure DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                const initialTab = getInitialTab();
+                switchToTab(initialTab);
+            });
+            } else {
+            // DOM already loaded
+            const initialTab = getInitialTab();
+            switchToTab(initialTab);
+        }
     </script>
 </body>
 </html>

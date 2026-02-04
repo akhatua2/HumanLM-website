@@ -1,232 +1,965 @@
 <style>
-    .yt-container { max-width: 720px; }
-
-    .yt-player {
-        background: #0f0f0f;
-        aspect-ratio: 16/9;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    /* YouTube Light Mode - Authentic */
+    .yt-page {
+        background: #fff;
+        color: #0f0f0f;
+        font-family: 'Roboto', -apple-system, sans-serif;
+        margin: -20px;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+        width: 100vw;
+        margin-bottom: 20px;
+        overflow: hidden;
     }
 
-    .yt-play-btn {
-        width: 68px;
-        height: 48px;
-        background: #FF0000;
-        border-radius: 12px;
+    /* Header */
+    .yt-header {
+        background: #fff;
+        height: 56px;
         display: flex;
         align-items: center;
-        justify-content: center;
+        padding: 0 16px;
+        border-bottom: 1px solid #e5e5e5;
+        gap: 16px;
     }
 
-    .yt-play-btn svg {
-        fill: white;
-        width: 20px;
+    .yt-menu-icon {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        cursor: pointer;
+        padding: 8px;
+    }
+
+    .yt-menu-icon span {
+        width: 18px;
+        height: 2px;
+        background: #606060;
+    }
+
+    .yt-logo {
+        display: flex;
+        align-items: center;
+        gap: 1px;
+        text-decoration: none;
+    }
+
+    .yt-logo-icon {
+        width: 29px;
         height: 20px;
-        margin-left: 3px;
-    }
-
-    .yt-meta {
-        display: flex;
-        gap: 12px;
-        padding: 12px 0;
-    }
-
-    .yt-avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: #CC0000;
+        background: #ff0000;
+        border-radius: 4px;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: white;
-        font-weight: 500;
-        font-size: 11px;
+    }
+
+    .yt-logo-icon svg {
+        width: 12px;
+        height: 12px;
+        fill: white;
+    }
+
+    .yt-logo-text {
+        font-size: 20px;
+        font-weight: 700;
+        color: #282828;
+        letter-spacing: -1.5px;
+        font-family: 'YouTube Sans', 'Roboto', sans-serif;
+    }
+
+    .yt-search-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        max-width: 640px;
+        margin: 0 auto;
+    }
+
+    .yt-search-box {
+        display: flex;
+        width: 100%;
+        max-width: 540px;
+    }
+
+    .yt-search-input {
+        flex: 1;
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 8px 16px;
+        color: #0f0f0f;
+        font-size: 16px;
+        border-radius: 20px 0 0 20px;
+        outline: none;
+    }
+
+    .yt-search-btn {
+        background: #f8f8f8;
+        border: 1px solid #ccc;
+        border-left: none;
+        padding: 0 20px;
+        border-radius: 0 20px 20px 0;
+        cursor: pointer;
+    }
+
+    .yt-search-btn svg {
+        width: 24px;
+        height: 24px;
+        fill: #030303;
+    }
+
+    /* Carousel Navigation */
+    .carousel-nav {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        background: #f9f9f9;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .carousel-btn {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1px solid #d3d3d3;
+        background: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: #606060;
+        transition: background 0.15s;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .carousel-btn:hover {
+        background: #f0f0f0;
+    }
+
+    #prevBtn {
+        left: 20px;
+    }
+
+    #nextBtn {
+        right: 20px;
+    }
+
+
+    /* Slides */
+    .example-slide {
+        display: none;
+    }
+    .example-slide.active {
+        display: block;
+    }
+
+    /* Main content */
+    .yt-main-content {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 24px 40px;
+    }
+
+    /* Annotated section */
+    .annotated-section {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 24px;
+    }
+
+    .section-label {
+        width: 32px;
         flex-shrink: 0;
     }
 
-    .yt-info h3 {
-        font-family: 'Roboto', sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 1.4;
-        margin-bottom: 4px;
+    .section-label-text {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg);
+        padding: 6px 4px;
+        border-radius: 3px;
     }
 
-    .yt-channel {
-        font-family: 'Roboto', sans-serif;
+    .section-label-text.input {
+        background: #E0F2FE;
+        color: #0369A1;
+    }
+
+    .section-label-text.output {
+        background: #DCFCE7;
+        color: #15803D;
+    }
+
+    .section-content {
+        flex: 1;
+        min-width: 0;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 20px;
+        background: transparent;
+    }
+
+    /* Video title */
+    .yt-video-title {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.4;
+        margin: 12px 0 8px;
+        color: #0f0f0f;
+    }
+
+    /* Channel row */
+    .yt-channel-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .yt-channel-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .yt-channel-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #c4302b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+    }
+
+    .yt-channel-name {
+        font-size: 16px;
+        font-weight: 500;
+        color: #0f0f0f;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .yt-verified svg {
+        width: 14px;
+        height: 14px;
+        fill: #606060;
+    }
+
+    .yt-subs {
         font-size: 12px;
         color: #606060;
     }
 
-    .yt-transcript {
-        background: #F2F2F2;
-        padding: 12px;
-        margin: 12px 0;
+    .yt-subscribe-btn {
+        background: #0f0f0f;
+        color: #fff;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 18px;
+        font-weight: 500;
+        font-size: 14px;
+        cursor: pointer;
     }
 
-    .yt-transcript-header {
-        font-family: 'Roboto', sans-serif;
-        font-size: 12px;
+    /* Action buttons */
+    .yt-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .yt-action-group {
+        display: flex;
+        background: #f2f2f2;
+        border-radius: 18px;
+        overflow: hidden;
+    }
+
+    .yt-action-btn {
+        background: #f2f2f2;
+        border: none;
+        padding: 8px 12px;
+        color: #0f0f0f;
+        font-size: 14px;
         font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+    }
+    .yt-action-btn:hover { background: #e5e5e5; }
+    .yt-action-btn svg {
+        width: 24px;
+        height: 24px;
+        fill: #0f0f0f;
+    }
+
+    .yt-action-group .divider {
+        width: 1px;
+        background: #ccc;
+    }
+
+    /* Description box */
+    .yt-description {
+        background: #f2f2f2;
+        border-radius: 12px;
+        padding: 12px;
+        margin-top: 12px;
+    }
+
+    .yt-desc-stats {
+        font-size: 14px;
+        font-weight: 500;
+        color: #0f0f0f;
         margin-bottom: 8px;
     }
+    .yt-desc-stats span { margin-right: 8px; }
+    .yt-hashtag { color: #065fd4; }
 
-    .yt-transcript-text {
-        font-family: 'Roboto', sans-serif;
-        font-size: 13px;
-        line-height: 1.6;
-        color: #030303;
-    }
-
-    .yt-transcript .expandable:not(.expanded)::after {
-        background: linear-gradient(transparent, #F2F2F2);
-    }
-
-    .yt-comments {
-        border-top: 1px solid #e5e5e5;
-        padding-top: 16px;
+    .yt-section-title {
+        font-size: 12px;
+        font-weight: 600;
+        color: #606060;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
         margin-top: 16px;
     }
 
+    .yt-transcript {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #0f0f0f;
+        white-space: pre-wrap;
+    }
+
+    .yt-description .expandable:not(.expanded)::after {
+        background: linear-gradient(transparent, #f2f2f2) !important;
+    }
+
+    /* User Simulation Data Box */
+    .user-sim-data {
+        background: #FFFBEB;
+        border: 1px solid #FDE68A;
+        border-radius: 12px;
+        padding: 16px;
+        margin-top: 16px;
+    }
+
+    .user-sim-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: #92400E;
+        margin-bottom: 12px;
+    }
+
+    .persona-section {
+        margin-bottom: 12px;
+    }
+
+    .persona-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #B45309;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+    }
+
+    .persona-content {
+        font-size: 13px;
+        line-height: 1.5;
+        color: #78350F;
+    }
+
+    .user-sim-data .expandable:not(.expanded)::after {
+        background: linear-gradient(transparent, #FFFBEB) !important;
+    }
+
+    /* ======== YOUTUBE COMMENTS SECTION ======== */
+    .yt-comments-section {
+        margin-top: 24px;
+        padding-top: 16px;
+        border-top: 1px solid #e5e5e5;
+    }
+
     .yt-comments-header {
-        font-family: 'Roboto', sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        margin-bottom: 24px;
+    }
+
+    .yt-comments-count {
+        font-size: 16px;
+        font-weight: 500;
+        color: #0f0f0f;
+    }
+
+    .yt-comments-sort {
+        display: flex;
+        align-items: center;
+        gap: 8px;
         font-size: 14px;
         font-weight: 500;
+        color: #0f0f0f;
+        cursor: pointer;
+    }
+
+    .yt-comments-sort svg {
+        width: 24px;
+        height: 24px;
+        fill: #0f0f0f;
+    }
+
+    /* Add comment input */
+    .yt-add-comment {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 24px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .yt-user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #ef6c00;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 500;
+        color: #fff;
+        flex-shrink: 0;
+    }
+
+    .yt-comment-input {
+        flex: 1;
+        border: none;
+        border-bottom: 1px solid #e5e5e5;
+        padding: 8px 0;
+        font-size: 14px;
+        color: #606060;
+        background: transparent;
+        outline: none;
+    }
+
+    /* Comment item */
+    .yt-comment-item {
+        display: flex;
+        gap: 16px;
         margin-bottom: 16px;
     }
 
-    .yt-comment-box {
-        display: flex;
-        gap: 12px;
+    .yt-comment-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        overflow: hidden;
     }
 
-    .yt-comment-content {
+    .yt-comment-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .yt-comment-body {
         flex: 1;
-        font-family: 'Roboto', sans-serif;
+    }
+
+    .yt-comment-meta {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-bottom: 4px;
+    }
+
+    .yt-comment-author {
         font-size: 13px;
+        font-weight: 500;
+        color: #0f0f0f;
+    }
+
+    .yt-comment-time {
+        font-size: 12px;
+        color: #606060;
+    }
+
+    .yt-comment-text {
+        font-size: 14px;
         line-height: 1.5;
+        color: #0f0f0f;
+        margin-bottom: 8px;
     }
 
     .yt-comment-actions {
         display: flex;
-        gap: 16px;
-        margin-top: 8px;
-        font-size: 12px;
+        align-items: center;
+        gap: 0;
+        margin-left: -8px;
+    }
+
+    .yt-comment-action-btn {
+        background: transparent;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
         color: #606060;
+        font-size: 12px;
+        font-weight: 500;
+        border-radius: 16px;
+    }
+    .yt-comment-action-btn:hover { background: #f2f2f2; }
+    .yt-comment-action-btn svg {
+        width: 20px;
+        height: 20px;
+        fill: #606060;
+    }
+
+    .yt-comment-replies {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 4px;
+        margin-left: -8px;
+    }
+
+    .yt-replies-btn {
+        background: transparent;
+        border: none;
+        padding: 8px 16px;
+        color: #065fd4;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 18px;
+    }
+    .yt-replies-btn:hover { background: #def1ff; }
+    .yt-replies-btn svg {
+        width: 20px;
+        height: 20px;
+        fill: #065fd4;
+    }
+
+    .yt-comment-menu {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 8px;
+        cursor: pointer;
+    }
+    .yt-comment-menu svg {
+        width: 24px;
+        height: 24px;
+        fill: #606060;
+    }
+
+    .yt-comment-wrapper {
+        position: relative;
+    }
+
+    /* User Persona Card - clean, compact design */
+    .user-persona-card {
+        background: #fefce8;
+        border: none;
+        border-radius: 12px;
+        padding: 16px;
+        margin-top: 16px;
+    }
+
+    .section-content > .user-persona-card:first-child {
+        margin-top: 0;
+    }
+
+    .persona-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .persona-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .persona-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .persona-info {
+        flex: 1;
+    }
+
+    .persona-username {
+        font-weight: 600;
+        font-size: 14px;
+        color: #0f0f0f;
+    }
+
+    .persona-subtitle {
+        font-size: 11px;
+        color: #92400e;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+    }
+
+    .persona-details {
+        display: grid;
+        gap: 6px;
+    }
+
+    .persona-row {
+        font-size: 13px;
+        color: #374151;
+        line-height: 1.4;
+    }
+
+    .persona-key {
+        font-weight: 600;
+        color: #92400e;
+        margin-right: 6px;
+    }
+
+    /* Predicted Comment Box */
+    .predicted-comment-box {
+        background: #f0fdf4;
+        border: none;
+        border-radius: 12px;
+        padding: 16px;
+    }
+
+    .predicted-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #166534;
+        margin-bottom: 12px;
+    }
+
+    .predicted-label svg {
+        width: 16px;
+        height: 16px;
+        fill: #22c55e;
+    }
+
+    .predicted-comment-box .yt-comment-item {
+        margin-bottom: 0;
+    }
+
+    .ground-truth-tag {
+        font-size: 10px;
+        font-weight: 600;
+        color: #15803D;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .ground-truth-tag svg {
+        width: 14px;
+        height: 14px;
+        fill: #22c55e;
+    }
+
+    /* Expand button */
+    .yt-page .expand-btn {
+        color: #606060;
+        background: none;
+        border: none;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 0;
+        margin-top: 4px;
+    }
+    .yt-page .expand-btn:hover { color: #0f0f0f; }
+
+    .expandable {
+        max-height: 80px;
+        overflow: hidden;
+        position: relative;
+    }
+    .expandable.expanded {
+        max-height: none;
+    }
+    .expandable:not(.expanded)::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 30px;
+        background: linear-gradient(transparent, #fff);
+        pointer-events: none;
+    }
+
+    @media (max-width: 900px) {
+        .annotated-section {
+            flex-direction: column;
+            gap: 8px;
+        }
+        .section-label { width: auto; }
+        .section-label-text {
+            writing-mode: horizontal-tb;
+            transform: none;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .yt-main-content { padding: 12px; }
+        .yt-search-container { display: none; }
+        .yt-video-title { font-size: 16px; }
     }
 </style>
 
-<div class="yt-container">
-    <div class="yt-player">
-        <div class="yt-play-btn">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        </div>
+<div class="yt-page">
+
+    <!-- Carousel -->
+    <div class="carousel-nav">
+        <button class="carousel-btn" id="prevBtn">‹</button>
+        <button class="carousel-btn" id="nextBtn">›</button>
     </div>
 
-    <div class="yt-meta">
-        <div class="yt-avatar">BBC</div>
-        <div class="yt-info">
-            <h3>Scotland first in world to make period products free - BBC News</h3>
-            <div class="yt-channel">BBC News</div>
-        </div>
-    </div>
+    <!-- Example 1 -->
+    <div class="example-slide active" id="example-1">
+        <div class="yt-main-content">
+            <!-- INPUT -->
+            <div class="annotated-section input-section">
+                <div class="section-label">
+                    <span class="section-label-text input">Input</span>
+                </div>
+                <div class="section-content">
+                    <h1 class="yt-video-title">Scotland first in world to make period products free | BBC News</h1>
 
-    <div class="yt-transcript">
-        <div class="yt-transcript-header">Transcript</div>
-        <div class="yt-transcript-text expandable" id="transcript-1">
-            Scotland has become the first country in the world to make female sanitary products free it means the authorities have a legal duty to ensure items such as tampons and sanitary pads are available without charge to anyone who needs them. An historic vote years in the making the result of the vote on motion 20328 in the name of monica lennon is yes 121 there were no votes against there were no abstentions the motion is agreed and the period products free provision scotland bill is passed. Monica Lennon seeing out her vision with Scotland becoming the first country in the world to make period products free for anyone who needs them. Menstruation is normal free universal access to tampons pads and reusable options should be normal too period dignity for all isn't radical or extreme it's simply the right thing to do. Period poverty is an issue the world over women in both impoverished nations as well as those in developed countries unable to afford suitable sanitary products resorting to toilet paper socks and even newspaper it affects self-esteem and even keeps girls from school having a significant impact on their education.
-        </div>
-        <button class="expand-btn" onclick="toggleExpand('transcript-1', this)">Show more</button>
-    </div>
-
-    <div class="yt-comments">
-        <div class="yt-comments-header">Comments</div>
-        
-        <div class="yt-comment-box" style="margin-bottom: 16px;">
-            <div class="yt-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">UK</div>
-            <div class="yt-comment-content">
-                <div class="persona-box">
-                    <strong>User Persona</strong>
-                    <div class="expandable" id="persona-news-1">
-                        <strong>Demographics:</strong> UK-based, British nationality, previously resided in Japan.<br><br>
-                        <strong>Interests:</strong> UK politics and Brexit developments, particularly Boris Johnson's leadership and Brexit negotiations. International terrorism and military operations. British royal family news. Climate change debates and Greta Thunberg's activism. Scottish and Irish independence issues. Conspiracy theories, showing skepticism toward official narratives. International news events including natural disasters.<br><br>
-                        <strong>Values:</strong> Strong pro-Brexit stance, demanding immediate EU exit. Anti-establishment sentiment and skepticism toward politicians. Nationalist perspective. Support for Scottish independence. Libertarian attitude toward personal freedom. Appreciation for people 'forging their own path'. Nuanced thinking on complex issues. Pragmatic approach to political problems.<br><br>
-                        <strong>Communication:</strong> Frequent use of profanity and crude language. British slang and colloquialisms. Emoji usage for emphasis. Capitalization for emphasis. Pop culture references and humor. Casual, conversational tone with informal grammar. Direct, blunt expression of opinions. Sarcastic and sardonic tone when discussing political figures.
+                    <div class="yt-channel-row">
+                        <div class="yt-channel-info">
+                            <div class="yt-channel-avatar">BBC</div>
+                            <div>
+                                <div class="yt-channel-name">
+                                    BBC News
+                                    <span class="yt-verified"><svg viewBox="0 0 24 24"><path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M9.8,17.3l-4.2-4.1L7,11.8l2.8,2.7L17,7.4l1.4,1.4L9.8,17.3z"/></svg></span>
+                                </div>
+                                <div class="yt-subs">14.7M subscribers</div>
+                            </div>
+                            <button class="yt-subscribe-btn">Subscribe</button>
+                        </div>
+                        <div class="yt-actions">
+                            <div class="yt-action-group">
+                                <button class="yt-action-btn"><svg viewBox="0 0 24 24"><path d="M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11H3v10h4h1h9.43 c1.06,0,1.98-0.67,2.19-1.61l1.34-6C21.23,12.15,20.18,11,18.77,11z"/></svg>12K</button>
+                                <div class="divider"></div>
+                                <button class="yt-action-btn"><svg viewBox="0 0 24 24"><path d="M17,4h-1H6.57C5.5,4,4.59,4.67,4.38,5.61l-1.34,6C2.77,12.85,3.82,14,5.23,14h4.23l-1.52,4.94 C7.62,19.97,8.46,21,9.62,21c0.58,0,1.14-0.24,1.52-0.65L17,14h4V4H17z"/></svg></button>
+                            </div>
+                            <button class="yt-action-btn"><svg viewBox="0 0 24 24"><path d="M15,5.63L20.66,12L15,18.37V14h-1c-3.96,0-7.14,1-9.75,3.09c1.84-4.07,5.11-6.4,9.89-7.1L15,9.86V5.63 M14,3v6C6.22,10.13,3.11,15.33,2,21c2.78-3.97,6.44-6,12-6v6l8-9L14,3L14,3z"/></svg>Share</button>
+                        </div>
                     </div>
-                    <button class="expand-btn" onclick="toggleExpand('persona-news-1', this)">Show more</button>
+
+                    <div class="yt-description">
+                        <div class="yt-desc-stats">
+                            <span>423K views</span>
+                            <span>Nov 24, 2020</span>
+                            <span class="yt-hashtag">#BBCNews</span>
+                        </div>
+                        <div class="yt-section-title">Transcript</div>
+                        <div class="yt-transcript expandable" id="transcript-1">Scotland has become the first country in the world to make female sanitary products free. It means the authorities have a legal duty to ensure items such as tampons and sanitary pads are available without charge to anyone who needs them.
+
+An historic vote years in the making - the result of the vote on motion 20328 in the name of Monica Lennon is yes 121, there were no votes against, there were no abstentions.</div>
+                        <button class="expand-btn" onclick="toggleExpand('transcript-1', this)">Show more</button>
+                    </div>
+
+                    <!-- User Persona (part of input) -->
+                    <div class="user-persona-card">
+                        <div class="persona-header">
+                            <div class="persona-avatar">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=ukuser_brexit2020" alt="@ukuser_brexit2020">
+                            </div>
+                            <div class="persona-info">
+                                <div class="persona-username">@ukuser_brexit2020</div>
+                                <div class="persona-subtitle">User Persona</div>
+                            </div>
+                        </div>
+                        <div class="persona-details">
+                            <div class="persona-row"><span class="persona-key">Location</span> UK-based, British nationality</div>
+                            <div class="persona-row"><span class="persona-key">Interests</span> UK politics, Brexit, Scottish independence</div>
+                            <div class="persona-row"><span class="persona-key">Values</span> Pro-Brexit, anti-establishment, nationalist</div>
+                            <div class="persona-row"><span class="persona-key">Style</span> British slang, casual, direct</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OUTPUT: Only the predicted comment -->
+            <div class="annotated-section output-section">
+                <div class="section-label">
+                    <span class="section-label-text output">Output</span>
+                </div>
+                <div class="section-content">
+                    <div class="predicted-comment-box">
+                        <div class="predicted-label">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Ground Truth Comment
+                        </div>
+                        <div class="yt-comment-item">
+                            <div class="yt-comment-avatar">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=ukuser_brexit2020" alt="@ukuser_brexit2020">
+                            </div>
+                            <div class="yt-comment-body">
+                                <div class="yt-comment-meta">
+                                    <span class="yt-comment-author">@ukuser_brexit2020</span>
+                                    <span class="yt-comment-time">3 years ago</span>
+                                </div>
+                                <div class="yt-comment-text">Meanwhile in Westminster they're all still bickering about whether they should or should not give children in impoverished areas free school meals.</div>
+                                <div class="yt-comment-actions">
+                                    <button class="yt-comment-action-btn"><svg viewBox="0 0 24 24"><path d="M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11H3v10h4h1h9.43 c1.06,0,1.98-0.67,2.19-1.61l1.34-6C21.23,12.15,20.18,11,18.77,11z"/></svg>847</button>
+                                    <button class="yt-comment-action-btn"><svg viewBox="0 0 24 24"><path d="M17,4h-1H6.57C5.5,4,4.59,4.67,4.38,5.61l-1.34,6C2.77,12.85,3.82,14,5.23,14h4.23l-1.52,4.94 C7.62,19.97,8.46,21,9.62,21c0.58,0,1.14-0.24,1.52-0.65L17,14h4V4H17z"/></svg></button>
+                                    <button class="yt-comment-action-btn">Reply</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="ground-truth">
-            <div class="yt-comment-box">
-                <div class="yt-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">UK</div>
-                <div class="yt-comment-content">
-                    <div class="ground-truth-label">Ground Truth Comment</div>
-                    <div class="yt-comment-text">Meanwhile in Westminster they're all still bickering about whether they should or should not give children in impoverished areas free school meals.</div>
-                    <div class="yt-comment-actions">
-                        <span>Like</span>
-                        <span>Reply</span>
+    <!-- Example 2 -->
+    <div class="example-slide" id="example-2">
+        <div class="yt-main-content">
+            <!-- INPUT -->
+            <div class="annotated-section input-section">
+                <div class="section-label">
+                    <span class="section-label-text input">Input</span>
+                </div>
+                <div class="section-content">
+                    <h1 class="yt-video-title">Australia fires: US crew dead in firefighting plane crash | BBC News</h1>
+
+                    <div class="yt-channel-row">
+                        <div class="yt-channel-info">
+                            <div class="yt-channel-avatar">BBC</div>
+                            <div>
+                                <div class="yt-channel-name">
+                                    BBC News
+                                    <span class="yt-verified"><svg viewBox="0 0 24 24"><path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M9.8,17.3l-4.2-4.1L7,11.8l2.8,2.7L17,7.4l1.4,1.4L9.8,17.3z"/></svg></span>
+                                </div>
+                                <div class="yt-subs">14.7M subscribers</div>
+                            </div>
+                            <button class="yt-subscribe-btn">Subscribe</button>
+                        </div>
+                        <div class="yt-actions">
+                            <div class="yt-action-group">
+                                <button class="yt-action-btn"><svg viewBox="0 0 24 24"><path d="M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11H3v10h4h1h9.43 c1.06,0,1.98-0.67,2.19-1.61l1.34-6C21.23,12.15,20.18,11,18.77,11z"/></svg>8.2K</button>
+                                <div class="divider"></div>
+                                <button class="yt-action-btn"><svg viewBox="0 0 24 24"><path d="M17,4h-1H6.57C5.5,4,4.59,4.67,4.38,5.61l-1.34,6C2.77,12.85,3.82,14,5.23,14h4.23l-1.52,4.94 C7.62,19.97,8.46,21,9.62,21c0.58,0,1.14-0.24,1.52-0.65L17,14h4V4H17z"/></svg></button>
+                            </div>
+                            <button class="yt-action-btn"><svg viewBox="0 0 24 24"><path d="M15,5.63L20.66,12L15,18.37V14h-1c-3.96,0-7.14,1-9.75,3.09c1.84-4.07,5.11-6.4,9.89-7.1L15,9.86V5.63 M14,3v6C6.22,10.13,3.11,15.33,2,21c2.78-3.97,6.44-6,12-6v6l8-9L14,3L14,3z"/></svg>Share</button>
+                        </div>
+                    </div>
+
+                    <div class="yt-description">
+                        <div class="yt-desc-stats">
+                            <span>892K views</span>
+                            <span>Jan 23, 2020</span>
+                            <span class="yt-hashtag">#AustraliaFires</span>
+                        </div>
+                        <div class="yt-section-title">Transcript</div>
+                        <div class="yt-transcript expandable" id="transcript-2">Three American firefighters have been killed while helping to battle Australia's bushfires. Authorities say they lost contact with an air tanker in southern New South Wales south of Canberra.
+
+Here's the Commissioner of New South Wales from the Rural Fire Service: "It is still an active fire ground and it did take some time to locate the wreckage of the plane. An investigation is now underway."</div>
+                        <button class="expand-btn" onclick="toggleExpand('transcript-2', this)">Show more</button>
+                    </div>
+
+                    <!-- User Persona (part of input) -->
+                    <div class="user-persona-card">
+                        <div class="persona-header">
+                            <div class="persona-avatar">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=california_firewatch" alt="@california_firewatch">
+                            </div>
+                            <div class="persona-info">
+                                <div class="persona-username">@california_firewatch</div>
+                                <div class="persona-subtitle">User Persona</div>
+                            </div>
+                        </div>
+                        <div class="persona-details">
+                            <div class="persona-row"><span class="persona-key">Location</span> California, USA</div>
+                            <div class="persona-row"><span class="persona-key">Interests</span> Aviation safety, firefighting, government accountability</div>
+                            <div class="persona-row"><span class="persona-key">Values</span> Worker safety, anti-nepotism, accountability</div>
+                            <div class="persona-row"><span class="persona-key">Style</span> Sarcastic, technical, punchy sentences</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="example-divider"><span>Example 2</span></div>
-
-    <div class="yt-player">
-        <div class="yt-play-btn">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        </div>
-    </div>
-
-    <div class="yt-meta">
-        <div class="yt-avatar">BBC</div>
-        <div class="yt-info">
-            <h3>Australia fires: US crew dead in firefighting plane crash - BBC News</h3>
-            <div class="yt-channel">BBC News</div>
-        </div>
-    </div>
-
-    <div class="yt-transcript">
-        <div class="yt-transcript-header">Transcript</div>
-        <div class="yt-transcript-text expandable" id="transcript-2">
-            Three American firefighters have been killed while helping to battle Australia's bushfires authorities say they lost contact with an air tanker in southern New South Wales south of Canberra now those on board they had been helping firefighting efforts by dropping water over a large out-of-control bushfire here's the Commissioner of New South Wales from the Rural Fire Service it is still an active fire ground and and it did take some time with the use of ground crews and a number of aerial surveillance platforms to try and locate the wreckage of the plane an investigation is now underway. Air tankers large air tankers operations have now been suspended as police investigate what happened in the crash and the cause of the crash but yes another reminder of the very difficult conditions that have been happening and also of the fact that these fires are still blazing some of them out of control as we speak 70 fires burning in New South Wales 44 of those are not contained at the moment so even though there was a lull in the weather in the past few days the danger is yet not over in this bushfire season.
-        </div>
-        <button class="expand-btn" onclick="toggleExpand('transcript-2', this)">Show more</button>
-    </div>
-
-    <div class="yt-comments">
-        <div class="yt-comments-header">Comments</div>
-        
-        <div class="yt-comment-box" style="margin-bottom: 16px;">
-            <div class="yt-avatar" style="background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);">CA</div>
-            <div class="yt-comment-content">
-                <div class="persona-box">
-                    <strong>User Persona</strong>
-                    <div class="expandable" id="persona-news-2">
-                        <strong>Demographics:</strong> California, USA. American nationality.<br><br>
-                        <strong>Interests:</strong> US politics and Trump administration activities. International politics, particularly Brexit developments. Aviation safety and firefighting equipment, demonstrating technical knowledge. Coronavirus pandemic response and public health policy. Economic issues and wealth inequality. Government accountability and transparency. Workers' rights and corporate responsibility.<br><br>
-                        <strong>Values:</strong> Strong opposition to nepotism and unqualified appointments. Belief in government accountability. Support for workers' rights and fair corporate taxation. Advocacy for public health measures. Concern for worker safety, praising firefighters. Preference for evidence-based policy and competent crisis management.<br><br>
-                        <strong>Communication:</strong> Frequent use of derogatory nicknames for political figures. Heavy use of mockery. Short, punchy sentences with strong emotional content. Extensive use of sarcasm. Occasional longer, more detailed responses when discussing technical topics like aviation safety.
-                    </div>
-                    <button class="expand-btn" onclick="toggleExpand('persona-news-2', this)">Show more</button>
+            <!-- OUTPUT: Only the predicted comment -->
+            <div class="annotated-section output-section">
+                <div class="section-label">
+                    <span class="section-label-text output">Output</span>
                 </div>
-            </div>
-        </div>
-
-        <div class="ground-truth" style="background: #EFF6FF; border-left-color: #3B82F6;">
-            <div class="yt-comment-box">
-                <div class="yt-avatar" style="background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);">CA</div>
-                <div class="yt-comment-content">
-                    <div class="ground-truth-label" style="color: #1D4ED8;">Ground Truth Comment</div>
-                    <div class="yt-comment-text">Before the US Forestry Service stopped using them due to the same reasons, the pilots were well aware of the dangers. They called them flying death traps. Unfortunately the "can-do" willingness of the firefighters and pilots made it so they risked their lives more than they should've. Also they knew of stress fractures in the planes structures AND STILL FLEW THEM! True heroes doing the best they could with horrible equipment.</div>
-                    <div class="yt-comment-actions">
-                        <span>Like</span>
-                        <span>Reply</span>
+                <div class="section-content">
+                    <div class="predicted-comment-box">
+                        <div class="predicted-label">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Ground Truth Comment
+                        </div>
+                        <div class="yt-comment-item">
+                            <div class="yt-comment-avatar">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=california_firewatch" alt="@california_firewatch">
+                            </div>
+                            <div class="yt-comment-body">
+                                <div class="yt-comment-meta">
+                                    <span class="yt-comment-author">@california_firewatch</span>
+                                    <span class="yt-comment-time">4 years ago</span>
+                                </div>
+                                <div class="yt-comment-text">Before the US Forestry Service stopped using them due to the same reasons, the pilots were well aware of the dangers. They called them flying death traps. Unfortunately the "can-do" willingness of the firefighters and pilots made it so they risked their lives more than they should've. Also they knew of stress fractures in the planes structures AND STILL FLEW THEM! True heroes doing the best they could with horrible equipment.</div>
+                                <div class="yt-comment-actions">
+                                    <button class="yt-comment-action-btn"><svg viewBox="0 0 24 24"><path d="M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11H3v10h4h1h9.43 c1.06,0,1.98-0.67,2.19-1.61l1.34-6C21.23,12.15,20.18,11,18.77,11z"/></svg>1.2K</button>
+                                    <button class="yt-comment-action-btn"><svg viewBox="0 0 24 24"><path d="M17,4h-1H6.57C5.5,4,4.59,4.67,4.38,5.61l-1.34,6C2.77,12.85,3.82,14,5.23,14h4.23l-1.52,4.94 C7.62,19.97,8.46,21,9.62,21c0.58,0,1.14-0.24,1.52-0.65L17,14h4V4H17z"/></svg></button>
+                                    <button class="yt-comment-action-btn">Reply</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

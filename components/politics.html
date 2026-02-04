@@ -1,12 +1,126 @@
 <style>
-    .medium-container { max-width: 680px; }
+    /* Medium Light Mode - Authentic */
+    .medium-page {
+        background: #fff;
+        color: #242424;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        margin: -20px;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+        width: 100vw;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
 
+    /* Carousel Navigation */
+    .carousel-nav {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        background: #f9f9f9;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .carousel-btn {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1px solid #d3d3d3;
+        background: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: #606060;
+        transition: background 0.15s;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .carousel-btn:hover {
+        background: #f0f0f0;
+    }
+
+    #prevBtn {
+        left: 20px;
+    }
+
+    #nextBtn {
+        right: 20px;
+    }
+
+
+    /* Slides */
+    .example-slide {
+        display: none;
+    }
+    .example-slide.active {
+        display: block;
+    }
+
+    .medium-main-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Side Annotations */
+    .annotated-section {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 24px;
+    }
+
+    .section-label {
+        width: 32px;
+        flex-shrink: 0;
+    }
+
+    .section-label-text {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg);
+        padding: 6px 4px;
+        border-radius: 3px;
+    }
+
+    .section-label-text.input {
+        background: #E0F2FE;
+        color: #0369A1;
+    }
+
+    .section-label-text.output {
+        background: #DCFCE7;
+        color: #15803D;
+    }
+
+    .section-content {
+        flex: 1;
+        min-width: 0;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 20px;
+        background: transparent;
+    }
+
+    /* Medium Header */
     .medium-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 14px 0;
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid #e5e5e5;
         margin-bottom: 32px;
     }
 
@@ -15,28 +129,44 @@
         font-size: 26px;
         font-weight: 400;
         letter-spacing: -0.5px;
+        color: #242424;
     }
 
     .medium-nav {
         display: flex;
         gap: 20px;
         font-size: 13px;
-        color: var(--text-secondary);
+        color: #6b6b6b;
+    }
+
+    .medium-nav span {
+        cursor: pointer;
+    }
+
+    .medium-nav span:hover {
+        color: #242424;
+    }
+
+    /* Article */
+    .medium-article {
+        max-width: 680px;
+        margin: 0 auto;
     }
 
     .medium-article-title {
         font-family: Georgia, serif;
-        font-size: 32px;
-        font-weight: 700;
+        font-size: 42px;
+        font-weight: 400;
         line-height: 1.2;
         letter-spacing: -0.3px;
         margin-bottom: 10px;
+        color: #242424;
     }
 
     .medium-article-subtitle {
         font-family: Georgia, serif;
-        font-size: 18px;
-        color: var(--text-secondary);
+        font-size: 22px;
+        color: #6b6b6b;
         font-weight: 400;
         line-height: 1.4;
         margin-bottom: 20px;
@@ -45,20 +175,21 @@
     .medium-author-row {
         display: flex;
         align-items: center;
-        gap: 10px;
-        margin-bottom: 24px;
+        gap: 12px;
+        margin-bottom: 32px;
     }
 
     .medium-author-avatar {
-        width: 44px;
-        height: 44px;
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: 600;
-        font-size: 14px;
+        overflow: hidden;
+    }
+
+    .medium-author-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
     .medium-author-info {
@@ -67,163 +198,351 @@
 
     .medium-author-name {
         font-weight: 500;
+        color: #242424;
     }
 
     .medium-article-meta {
-        color: var(--text-secondary);
+        color: #6b6b6b;
         font-size: 12px;
     }
 
     .medium-body {
         font-family: Georgia, serif;
-        font-size: 18px;
-        line-height: 1.8;
+        font-size: 21px;
+        line-height: 1.58;
+        color: #242424;
     }
 
     .medium-body p {
-        margin-bottom: 20px;
+        margin-bottom: 24px;
     }
 
-    .medium-body .expandable:not(.expanded)::after {
-        background: linear-gradient(transparent, var(--bg));
+    /* User Persona Card */
+    .user-persona-card {
+        background: #fefce8;
+        border: none;
+        border-radius: 12px;
+        padding: 16px;
+        margin-top: 16px;
     }
 
-    .medium-responses {
-        border-top: 1px solid var(--border);
-        padding-top: 24px;
-        margin-top: 32px;
+    .section-content > .user-persona-card:first-child {
+        margin-top: 0;
     }
 
-    .medium-responses h4 {
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 16px;
-    }
-
-    .medium-persona {
+    .persona-header {
         display: flex;
-        align-items: flex-start;
-        gap: 10px;
+        align-items: center;
+        gap: 12px;
         margin-bottom: 12px;
     }
 
-    .medium-ground-truth {
-        background: #ECFDF5;
-        border: 1px solid #A7F3D0;
-        border-left: 3px solid #10B981;
+    .persona-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .persona-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .persona-info {
+        flex: 1;
+    }
+
+    .persona-username {
+        font-weight: 600;
+        font-size: 14px;
+        color: #0f0f0f;
+    }
+
+    .persona-subtitle {
+        font-size: 11px;
+        color: #92400e;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+    }
+
+    .persona-details {
+        display: grid;
+        gap: 6px;
+    }
+
+    .persona-row {
+        font-size: 13px;
+        color: #374151;
+        line-height: 1.4;
+    }
+
+    .persona-key {
+        font-weight: 600;
+        color: #92400e;
+        margin-right: 6px;
+    }
+
+    /* Predicted Response Box */
+    .predicted-response-box {
+        background: #f0fdf4;
+        border: none;
+        border-radius: 12px;
         padding: 16px;
     }
 
-    .medium-ground-truth .ground-truth-label {
-        color: #10B981;
+    .predicted-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #166534;
+        margin-bottom: 12px;
+    }
+
+    .predicted-label svg {
+        width: 16px;
+        height: 16px;
+        fill: #22c55e;
     }
 
     .medium-response-text {
         font-family: Georgia, serif;
-        font-size: 16px;
+        font-size: 18px;
         line-height: 1.7;
+        color: #242424;
+    }
+
+    .medium-response-text p {
+        margin-bottom: 16px;
+    }
+
+    /* Expand button */
+    .medium-page .expand-btn {
+        color: #1a8917;
+        background: none;
+        border: none;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 0;
+        margin-top: 8px;
+    }
+    .medium-page .expand-btn:hover { 
+        color: #0f730c; 
+        text-decoration: underline;
+    }
+
+    .expandable {
+        max-height: 120px;
+        overflow: hidden;
+        position: relative;
+    }
+    .expandable.expanded {
+        max-height: none;
+    }
+    .expandable:not(.expanded)::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 40px;
+        background: linear-gradient(transparent, #fff);
+        pointer-events: none;
+    }
+
+    @media (max-width: 900px) {
+        .annotated-section {
+            flex-direction: column;
+            gap: 8px;
+        }
+        .section-label { width: auto; }
+        .section-label-text {
+            writing-mode: horizontal-tb;
+            transform: none;
+        }
+        .medium-article {
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .medium-main-content { padding: 12px; }
+        .medium-article-title { font-size: 32px; }
+        .medium-article-subtitle { font-size: 18px; }
+        .medium-body { font-size: 18px; }
     }
 </style>
 
-<div class="medium-container">
-    <div class="medium-header">
-        <div class="medium-logo">Medium</div>
-        <div class="medium-nav">
-            <span>Our story</span>
-            <span>Membership</span>
-            <span>Write</span>
-        </div>
+<div class="medium-page">
+
+    <!-- Carousel -->
+    <div class="carousel-nav">
+        <button class="carousel-btn" id="prevBtn">‹</button>
+        <button class="carousel-btn" id="nextBtn">›</button>
     </div>
 
-    <article>
-        <h2 class="medium-article-title">Possible Democratic Presidential Candidates are Grabbing the Headlines</h2>
-        <p class="medium-article-subtitle">Look for these familiar faces on the campaign trail</p>
-        <div class="medium-author-row">
-            <div class="medium-author-avatar" style="background: linear-gradient(135deg, #1A8917 0%, #2ECC71 100%);">CB</div>
-            <div class="medium-author-info">
-                <div class="medium-author-name">Caren Black</div>
-                <div class="medium-article-meta">Published in Political Thought · 12 min read · Feb 2025</div>
-            </div>
-        </div>
-        <div class="medium-body expandable" id="medium-post-1">
-            <p>The Democratic presidential hopefuls are starting their campaigns already. It may be too little too late if Trump cancels elections, including the 2028 presidential election. But let's pretend for a moment that these are normal times and the Democrats have lost a big election.</p>
-            <p>The first was California governor Gavin Newsom (D). God, it feels like he has been running for president forever, doesn't it? He's shaking things up, interviewing guests from across the political spectrum including Charlie Kirk and Steve Bannon. This started a firestorm among Democrats, but I think it was a smart move.</p>
-            <p>Rep. Alexandria Ocasio-Cortez (D-N.Y.) has been barnstorming through Arizona, Nevada and Colorado on a "Fighting Oligarchy" tour with Sen. Bernie Sanders (I-VT), drawing huge, dare I say Trump-sized, crowds. I've been a huge fan of AOC and the Squad since she was elected.</p>
-        </div>
-        <button class="expand-btn" onclick="toggleExpand('medium-post-1', this)">Show more</button>
-    </article>
-
-    <div class="medium-responses">
-        <h4>Responses</h4>
-        <div class="medium-persona">
-            <div class="medium-author-avatar" style="background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);">VM</div>
-            <div class="persona-box" style="flex: 1; margin-bottom: 0;">
-                <strong>User Persona</strong>
-                <div class="expandable" id="persona-politics-1">
-                    <strong>Demographics:</strong> Location: Oregon (Salem, OR mentioned). Occupation: US Marine, no longer on active duty. American. Physically campaigned for Bernie Sanders in New Hampshire primary 2016.<br><br>
-                    <strong>Interests:</strong> Progressive politics and Bernie Sanders advocacy. Trump legal troubles and accountability. Climate change and environmental policy. Abortion rights. Election integrity and voting systems. Gun control. Healthcare policy and Medicare for All.<br><br>
-                    <strong>Values:</strong> Strong progressive ideology with Bernie Sanders as preferred candidate. Intense opposition to Trump and MAGA movement. Climate action urgency. Support for reproductive rights. Advocacy for gun control. Support for universal healthcare. Anti-war stance based on military experience.<br><br>
-                    <strong>Communication:</strong> Casual, conversational tone with informal language. Frequent use of sarcasm and mockery. Brief, punchy responses. Employs rhetorical questions for effect. Uses crude humor. Direct, declarative sentences without hedging. Personal anecdotes to establish credibility.
+    <!-- Example 1 -->
+    <div class="example-slide active" id="example-1">
+        <div class="medium-main-content">
+            <!-- INPUT -->
+            <div class="annotated-section input-section">
+                <div class="section-label">
+                    <span class="section-label-text input">Input</span>
                 </div>
-                <button class="expand-btn" onclick="toggleExpand('persona-politics-1', this)">Show more</button>
-            </div>
-        </div>
-        <div class="medium-ground-truth">
-            <div class="ground-truth-label">Ground Truth Comment</div>
-            <p class="medium-response-text">
-                I'm a Bernie Bro and realize he is too old to run for Prez. For me Gavin is too Hollywood and AOC needs more seasoning. Cory would be my choice if these are the only in the running. Michigan Gov Gretchen Whitmer would be my best choice.
-            </p>
-        </div>
-    </div>
+                <div class="section-content">
+                    <div class="medium-header">
+                        <div class="medium-logo">Medium</div>
+                        <div class="medium-nav">
+                            <span>Our story</span>
+                            <span>Membership</span>
+                            <span>Write</span>
+                        </div>
+                    </div>
 
-    <div class="example-divider"><span>Example 2</span></div>
+                    <article class="medium-article">
+                        <h2 class="medium-article-title">Possible Democratic Presidential Candidates are Grabbing the Headlines</h2>
+                        <p class="medium-article-subtitle">Look for these familiar faces on the campaign trail</p>
+                        <div class="medium-author-row">
+                            <div class="medium-author-avatar">
+                                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=CarenBlack" alt="Caren Black">
+                            </div>
+                            <div class="medium-author-info">
+                                <div class="medium-author-name">Caren Black</div>
+                                <div class="medium-article-meta">Published in Political Thought · 12 min read · Feb 2025</div>
+                            </div>
+                        </div>
+                        <div class="medium-body expandable" id="medium-post-1">
+                            <p>The Democratic presidential hopefuls are starting their campaigns already. It may be too little too late if Trump cancels elections, including the 2028 presidential election. But let's pretend for a moment that these are normal times and the Democrats have lost a big election.</p>
+                            <p>The first was California governor Gavin Newsom (D). God, it feels like he has been running for president forever, doesn't it? He's shaking things up, interviewing guests from across the political spectrum including Charlie Kirk and Steve Bannon. This started a firestorm among Democrats, but I think it was a smart move.</p>
+                            <p>Rep. Alexandria Ocasio-Cortez (D-N.Y.) has been barnstorming through Arizona, Nevada and Colorado on a "Fighting Oligarchy" tour with Sen. Bernie Sanders (I-VT), drawing huge, dare I say Trump-sized, crowds. I've been a huge fan of AOC and the Squad since she was elected.</p>
+                        </div>
+                        <button class="expand-btn" onclick="toggleExpand('medium-post-1', this)">Show more</button>
+                    </article>
 
-    <div class="medium-header">
-        <div class="medium-logo">Medium</div>
-        <div class="medium-nav">
-            <span>Our story</span>
-            <span>Membership</span>
-            <span>Write</span>
-        </div>
-    </div>
-
-    <article>
-        <h2 class="medium-article-title">How the U.S. Became Fascism's Greatest Success Story</h2>
-        <p class="medium-article-subtitle">Our 'land of the free' is collapsing into an autocratic nightmare</p>
-        <div class="medium-author-row">
-            <div class="medium-author-avatar" style="background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);">RK</div>
-            <div class="medium-author-info">
-                <div class="medium-author-name">Robert Krulwich</div>
-                <div class="medium-article-meta">Published in Political Analysis · 15 min read · Jun 2025</div>
-            </div>
-        </div>
-        <div class="medium-body expandable" id="medium-post-2">
-            <p>It's 2025, and 'the land of the free' is dead and gone. Kaput. The once-inspiring 'shining city on the hill' has vanished. So has the American dream of a wondrous 'land of opportunity.' These American attributes or ideals were never fully realized, sadly, but at least the promise was still there - until recently.</p>
-            <p>The reason the far-right takeover of the U.S. is fascism's greatest 'success story' is simple: the U.S. is both the world's foremost (former) bastion of democracy and by far the largest nation (population: 347,000,000) to ever succumb to autocratic fascism.</p>
-            <p>What made the U.S. a prime target for a fascist takeover? In my opinion, our super-individualism and its alter-ego, late-stage capitalism, paved the way and made U.S. fascism almost inevitable. Both systems are based on selfishness, greed, and endless competition.</p>
-        </div>
-        <button class="expand-btn" onclick="toggleExpand('medium-post-2', this)">Show more</button>
-    </article>
-
-    <div class="medium-responses">
-        <h4>Responses</h4>
-        <div class="medium-persona">
-            <div class="medium-author-avatar" style="background: linear-gradient(135deg, #DC2626 0%, #F87171 100%);">TA</div>
-            <div class="persona-box" style="flex: 1; margin-bottom: 0;">
-                <strong>User Persona</strong>
-                <div class="expandable" id="persona-politics-2">
-                    <strong>Interests:</strong> Trump administration policies and actions, repeatedly commenting on Trump's relationship with Putin and Russia. Russia-Ukraine conflict and military developments. NATO and international alliances. Geopolitical strategy and foreign policy. U.S. education system and critical thinking. Election integrity and democratic processes. Project 2025 and Republican policy agenda.<br><br>
-                    <strong>Values:</strong> Strong anti-Trump stance. Belief Trump is a Russian asset. Deep criticism of Republican Party. Patriotic concern for America's direction. Support for Ukraine. Value of education and critical thinking.<br><br>
-                    <strong>Communication:</strong> Direct and harsh language with strong emotional content. Frequent use of rhetorical questions for emphasis. Sarcastic and dismissive tone toward opposing views. Mix of brief agreements and longer analytical responses. Liberal use of exclamation points. Expresses gratitude for informative content.
+                    <!-- User Persona (part of input) -->
+                    <div class="user-persona-card">
+                        <div class="persona-header">
+                            <div class="persona-avatar">
+                                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=male_medium_user_1" alt="User">
+                            </div>
+                            <div class="persona-info">
+                                <div class="persona-username">User Persona</div>
+                                <div class="persona-subtitle">Commenter Profile</div>
+                            </div>
+                        </div>
+                        <div class="persona-details">
+                            <div class="persona-row"><span class="persona-key">Demographics:</span> Location: Oregon (Salem, OR mentioned). Occupation: US Marine, no longer on active duty. American. Physically campaigned for Bernie Sanders in New Hampshire primary 2016.</div>
+                            <div class="persona-row"><span class="persona-key">Interests:</span> Progressive politics and Bernie Sanders advocacy. Trump legal troubles and accountability. Climate change and environmental policy. Abortion rights. Election integrity and voting systems. Gun control. Healthcare policy and Medicare for All.</div>
+                            <div class="persona-row"><span class="persona-key">Values:</span> Strong progressive ideology with Bernie Sanders as preferred candidate. Intense opposition to Trump and MAGA movement. Climate action urgency. Support for reproductive rights. Advocacy for gun control. Support for universal healthcare. Anti-war stance based on military experience.</div>
+                            <div class="persona-row"><span class="persona-key">Communication:</span> Casual, conversational tone with informal language. Frequent use of sarcasm and mockery. Brief, punchy responses. Employs rhetorical questions for effect. Uses crude humor. Direct, declarative sentences without hedging. Personal anecdotes to establish credibility.</div>
+                        </div>
+                    </div>
                 </div>
-                <button class="expand-btn" onclick="toggleExpand('persona-politics-2', this)">Show more</button>
+            </div>
+
+            <!-- OUTPUT: Only the predicted response -->
+            <div class="annotated-section output-section">
+                <div class="section-label">
+                    <span class="section-label-text output">Output</span>
+                </div>
+                <div class="section-content">
+                    <div class="predicted-response-box">
+                        <div class="predicted-label">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Ground Truth Response
+                        </div>
+                        <div class="medium-response-text">
+                            <p>I'm a Bernie Bro and realize he is too old to run for Prez. For me Gavin is too Hollywood and AOC needs more seasoning. Cory would be my choice if these are the only in the running. Michigan Gov Gretchen Whitmer would be my best choice.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="medium-ground-truth">
-            <div class="ground-truth-label">Ground Truth Comment</div>
-            <p class="medium-response-text">
-                The Supreme Court justice's are intelligent people so why is it that they seem to be completely blind to what is happening in the U.S.? Surely they can't believe that DT and the MAGAT's are the answers to our many real world problems. I have a degree in tax accounting and I also have an MBA and I have always thought that the U.S. brand of capitalism went too far. I have always felt that the "invisible hand of capitalism" was used to justify too many actions and decisions that were morally bankrupt. I believe we have our first through twelfth grade education system to blame for the fact that "most U.S. citizens seem too dumbed-down to fully grasp what's going on". So, if we ever have another Department of Education it is good that it will have to be re-built from the ground up. Let's just hope they don't make the same mistakes again.
-            </p>
+    </div>
+
+    <!-- Example 2 -->
+    <div class="example-slide" id="example-2">
+        <div class="medium-main-content">
+            <!-- INPUT -->
+            <div class="annotated-section input-section">
+                <div class="section-label">
+                    <span class="section-label-text input">Input</span>
+                </div>
+                <div class="section-content">
+                    <div class="medium-header">
+                        <div class="medium-logo">Medium</div>
+                        <div class="medium-nav">
+                            <span>Our story</span>
+                            <span>Membership</span>
+                            <span>Write</span>
+                        </div>
+                    </div>
+
+                    <article class="medium-article">
+                        <h2 class="medium-article-title">How the U.S. Became Fascism's Greatest Success Story</h2>
+                        <p class="medium-article-subtitle">Our 'land of the free' is collapsing into an autocratic nightmare</p>
+                        <div class="medium-author-row">
+                            <div class="medium-author-avatar">
+                                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=RobertKrulwich" alt="Robert Krulwich">
+                            </div>
+                            <div class="medium-author-info">
+                                <div class="medium-author-name">Robert Krulwich</div>
+                                <div class="medium-article-meta">Published in Political Analysis · 15 min read · Jun 2025</div>
+                            </div>
+                        </div>
+                        <div class="medium-body expandable" id="medium-post-2">
+                            <p>It's 2025, and 'the land of the free' is dead and gone. Kaput. The once-inspiring 'shining city on the hill' has vanished. So has the American dream of a wondrous 'land of opportunity.' These American attributes or ideals were never fully realized, sadly, but at least the promise was still there - until recently.</p>
+                            <p>The reason the far-right takeover of the U.S. is fascism's greatest 'success story' is simple: the U.S. is both the world's foremost (former) bastion of democracy and by far the largest nation (population: 347,000,000) to ever succumb to autocratic fascism.</p>
+                            <p>What made the U.S. a prime target for a fascist takeover? In my opinion, our super-individualism and its alter-ego, late-stage capitalism, paved the way and made U.S. fascism almost inevitable. Both systems are based on selfishness, greed, and endless competition.</p>
+                        </div>
+                        <button class="expand-btn" onclick="toggleExpand('medium-post-2', this)">Show more</button>
+                    </article>
+
+                    <!-- User Persona (part of input) -->
+                    <div class="user-persona-card">
+                        <div class="persona-header">
+                            <div class="persona-avatar">
+                                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=female_medium_user_2" alt="User">
+                            </div>
+                            <div class="persona-info">
+                                <div class="persona-username">User Persona</div>
+                                <div class="persona-subtitle">Commenter Profile</div>
+                            </div>
+                        </div>
+                        <div class="persona-details">
+                            <div class="persona-row"><span class="persona-key">Interests:</span> Trump administration policies and actions, repeatedly commenting on Trump's relationship with Putin and Russia. Russia-Ukraine conflict and military developments. NATO and international alliances. Geopolitical strategy and foreign policy. U.S. education system and critical thinking. Election integrity and democratic processes. Project 2025 and Republican policy agenda.</div>
+                            <div class="persona-row"><span class="persona-key">Values:</span> Strong anti-Trump stance. Belief Trump is a Russian asset. Deep criticism of Republican Party. Patriotic concern for America's direction. Support for Ukraine. Value of education and critical thinking.</div>
+                            <div class="persona-row"><span class="persona-key">Communication:</span> Direct and harsh language with strong emotional content. Frequent use of rhetorical questions for emphasis. Sarcastic and dismissive tone toward opposing views. Mix of brief agreements and longer analytical responses. Liberal use of exclamation points. Expresses gratitude for informative content.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OUTPUT: Only the predicted response -->
+            <div class="annotated-section output-section">
+                <div class="section-label">
+                    <span class="section-label-text output">Output</span>
+                </div>
+                <div class="section-content">
+                    <div class="predicted-response-box">
+                        <div class="predicted-label">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Ground Truth Response
+                        </div>
+                        <div class="medium-response-text">
+                            <p>The Supreme Court justice's are intelligent people so why is it that they seem to be completely blind to what is happening in the U.S.? Surely they can't believe that DT and the MAGAT's are the answers to our many real world problems. I have a degree in tax accounting and I also have an MBA and I have always thought that the U.S. brand of capitalism went too far. I have always felt that the "invisible hand of capitalism" was used to justify too many actions and decisions that were morally bankrupt. I believe we have our first through twelfth grade education system to blame for the fact that "most U.S. citizens seem too dumbed-down to fully grasp what's going on". So, if we ever have another Department of Education it is good that it will have to be re-built from the ground up. Let's just hope they don't make the same mistakes again.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>

@@ -1,6 +1,18 @@
 <style>
-    .amz-container { max-width: 800px; }
+    /* Amazon Light Mode - Authentic */
+    .amz-page {
+        background: #fff;
+        color: #0f1111;
+        font-family: 'Amazon Ember', -apple-system, sans-serif;
+        margin: -20px;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+        width: 100vw;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
 
+    /* Amazon Header */
     .amz-header {
         background: #131921;
         padding: 10px 16px;
@@ -14,13 +26,14 @@
         font-weight: 700;
         font-size: 20px;
         letter-spacing: -0.5px;
+        text-decoration: none;
     }
 
     .amz-logo span { color: white; }
 
     .amz-search {
         flex: 1;
-        max-width: 400px;
+        max-width: 600px;
         display: flex;
     }
 
@@ -29,6 +42,7 @@
         padding: 8px 10px;
         border: none;
         font-size: 13px;
+        border-radius: 4px 0 0 4px;
     }
 
     .amz-search button {
@@ -36,18 +50,129 @@
         border: none;
         padding: 8px 14px;
         cursor: pointer;
+        border-radius: 0 4px 4px 0;
     }
 
+    .amz-search button svg {
+        width: 20px;
+        height: 20px;
+        fill: #131921;
+    }
+
+    /* Carousel Navigation */
+    .carousel-nav {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        /* background: #f9f9f9; */
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .carousel-btn {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1px solid #d3d3d3;
+        background: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: #606060;
+        transition: background 0.15s;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .carousel-btn:hover {
+        background: #f0f0f0;
+    }
+
+    #prevBtn {
+        left: 20px;
+    }
+
+    #nextBtn {
+        right: 20px;
+    }
+
+
+    /* Slides */
+    .example-slide {
+        display: none;
+    }
+    .example-slide.active {
+        display: block;
+    }
+
+    /* Main content */
+    .amz-main-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px 40px;
+    }
+
+    /* Annotated section */
+    .annotated-section {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 24px;
+    }
+
+    .section-label {
+        width: 32px;
+        flex-shrink: 0;
+    }
+
+    .section-label-text {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg);
+        padding: 6px 4px;
+        border-radius: 3px;
+    }
+
+    .section-label-text.input {
+        background: #E0F2FE;
+        color: #0369A1;
+    }
+
+    .section-label-text.output {
+        background: #DCFCE7;
+        color: #15803D;
+    }
+
+    .section-content {
+        flex: 1;
+        min-width: 0;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 20px;
+        background: transparent;
+    }
+
+    /* Amazon Product Card */
     .amz-card {
         background: white;
         border: 1px solid #DDD;
-        border-top: none;
+        border-radius: 4px;
         padding: 20px;
     }
 
     .amz-layout {
         display: grid;
-        grid-template-columns: 140px 1fr;
+        grid-template-columns: 200px 1fr;
         gap: 24px;
     }
 
@@ -61,6 +186,7 @@
         text-align: center;
         color: white;
         font-size: 11px;
+        border-radius: 4px;
     }
 
     .amz-cover-title {
@@ -70,52 +196,180 @@
     }
 
     .amz-details h3 {
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 400;
-        margin-bottom: 4px;
+        margin-bottom: 8px;
         color: #0F1111;
+        line-height: 1.3;
     }
 
     .amz-author {
         color: #007185;
-        font-size: 13px;
-        margin-bottom: 8px;
+        font-size: 14px;
+        margin-bottom: 12px;
+        cursor: pointer;
+    }
+
+    .amz-author:hover {
+        color: #C7511F;
+        text-decoration: underline;
     }
 
     .amz-rating {
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
         margin-bottom: 12px;
-        font-size: 13px;
+        font-size: 14px;
     }
 
-    .amz-stars { color: #FFA41C; }
-    .amz-rating-count { color: #007185; }
+    .amz-stars { 
+        color: #FFA41C; 
+        font-size: 16px;
+    }
+    .amz-rating-count { 
+        color: #007185; 
+        cursor: pointer;
+    }
+    .amz-rating-count:hover {
+        color: #C7511F;
+        text-decoration: underline;
+    }
 
     .amz-description {
-        font-size: 13px;
+        font-size: 14px;
         line-height: 1.6;
-        color: #333;
+        color: #0F1111;
         background: #F7F7F7;
-        padding: 12px;
+        padding: 16px;
         margin-bottom: 16px;
+        border-radius: 4px;
     }
 
     .amz-description .expandable:not(.expanded)::after {
-        background: linear-gradient(transparent, #F7F7F7);
+        background: linear-gradient(transparent, #F7F7F7) !important;
     }
 
-    .amz-reviews {
-        border-top: 1px solid #DDD;
-        padding-top: 16px;
+    .amz-section-title {
+        font-size: 12px;
+        font-weight: 600;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
         margin-top: 16px;
     }
 
-    .amz-reviews h4 {
-        font-size: 16px;
-        font-weight: 700;
+    /* User Persona Card */
+    .user-persona-card {
+        background: #fefce8;
+        border: none;
+        border-radius: 12px;
+        padding: 16px;
+        margin-top: 16px;
+    }
+
+    .section-content > .user-persona-card:first-child {
+        margin-top: 0;
+    }
+
+    .persona-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
         margin-bottom: 12px;
+    }
+
+    .persona-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .persona-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .persona-info {
+        flex: 1;
+    }
+
+    .persona-username {
+        font-weight: 600;
+        font-size: 14px;
+        color: #0f0f0f;
+    }
+
+    .persona-subtitle {
+        font-size: 11px;
+        color: #92400e;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+    }
+
+    .persona-details {
+        display: grid;
+        gap: 6px;
+    }
+
+    .persona-row {
+        font-size: 13px;
+        color: #374151;
+        line-height: 1.4;
+    }
+
+    .persona-key {
+        font-weight: 600;
+        color: #92400e;
+        margin-right: 6px;
+    }
+
+    /* Reviews Section */
+    .amz-reviews {
+        padding-top: 0;
+        margin-top: 0;
+    }
+
+    .amz-reviews h4 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        color: #0F1111;
+    }
+
+    /* Predicted Review Box */
+    .predicted-review-box {
+        background: #f0fdf4;
+        border: none;
+        border-radius: 12px;
+        padding: 16px;
+    }
+
+    .predicted-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #166534;
+        margin-bottom: 12px;
+    }
+
+    .predicted-label svg {
+        width: 16px;
+        height: 16px;
+        fill: #22c55e;
+    }
+
+    .amz-review-item {
+        margin-bottom: 0;
     }
 
     .amz-review-header {
@@ -128,134 +382,319 @@
 
     .amz-review-title {
         font-weight: 600;
-        font-size: 14px;
+        font-size: 16px;
+        color: #0F1111;
     }
 
     .amz-verified {
         background: #067D62;
         color: white;
-        font-size: 10px;
-        padding: 2px 6px;
+        font-size: 11px;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-weight: 500;
+    }
+
+    .amz-review-author {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    .amz-review-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .amz-review-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .amz-review-author-name {
+        font-size: 13px;
+        font-weight: 500;
+        color: #0F1111;
+    }
+
+    .amz-review-date {
+        font-size: 13px;
+        color: #666;
     }
 
     .amz-review-text {
-        font-size: 13px;
+        font-size: 14px;
         line-height: 1.6;
+        color: #0F1111;
+    }
+
+    /* Expand button */
+    .amz-page .expand-btn {
+        color: #007185;
+        background: none;
+        border: none;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 0;
+        margin-top: 4px;
+    }
+    .amz-page .expand-btn:hover { 
+        color: #C7511F; 
+        text-decoration: underline;
+    }
+
+    .expandable {
+        max-height: 80px;
+        overflow: hidden;
+        position: relative;
+    }
+    .expandable.expanded {
+        max-height: none;
+    }
+    .expandable:not(.expanded)::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 30px;
+        background: linear-gradient(transparent, #fff);
+        pointer-events: none;
+    }
+
+    @media (max-width: 900px) {
+        .annotated-section {
+            flex-direction: column;
+            gap: 8px;
+        }
+        .section-label { width: auto; }
+        .section-label-text {
+            writing-mode: horizontal-tb;
+            transform: none;
+        }
+        .amz-layout { 
+            grid-template-columns: 1fr; 
+        }
+        .amz-cover { 
+            max-width: 200px; 
+            margin: 0 auto; 
+        }
     }
 
     @media (max-width: 768px) {
-        .amz-layout { grid-template-columns: 1fr; }
-        .amz-cover { max-width: 140px; margin: 0 auto; }
+        .amz-main-content { padding: 12px; }
+        .amz-search { display: none; }
+        .amz-details h3 { font-size: 18px; }
     }
 </style>
 
-<div class="amz-container">
-    <div class="amz-header">
-        <div class="amz-logo">amazon<span>.com</span></div>
-        <div class="amz-search">
-            <input type="text" value="Bob Books Set 1" disabled>
-            <button>Search</button>
-        </div>
-    </div>
-    <div class="amz-card">
-        <div class="amz-layout">
-            <div class="amz-cover" style="background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);">
-                <div class="amz-cover-title">BOB BOOKS</div>
-                <div>Set 1: Beginning Readers</div>
-            </div>
-            <div class="amz-details">
-                <h3>Bob Books - Set 1: Beginning Readers Box Set | Phonics, Ages 4 and up, Kindergarten</h3>
-                <div class="amz-author">by Bobby Lynn Maslen (Author), John R. Maslen (Illustrator)</div>
-                <div class="amz-rating">
-                    <span class="amz-stars">★★★★★</span>
-                    <span class="amz-rating-count">12,847 ratings</span>
-                </div>
-                <div class="amz-description">
-                    <div class="expandable" id="book-desc-1">
-                        <strong>From the Author:</strong> You've prepared your child for reading - refrigerator magnets down low and easy to reach; letter sounds taught. Your child can proudly spell his or her name. Perhaps he can identify the "stop" and "open" signs as you drive in your car. He or she is ready for the next step into reading. Inside the colorful box, the bright red cover beckons. On the first page, the letters: M - a - t. Your child says the sounds: mmmmm, aaa, ttt. Then, faster: "Mat." Your youngster has read his first word! "Sam", "sat" and "on" complete the vocabulary, and suddenly your child can say, "I read the whole book!" That is the magic of Bob Books. After 13 years of teaching 3, 4 and 5-year-olds, watching a child make that giant first step into reading still thrills me.<br><br>
-                        <strong>Features:</strong> The Bob Books boxed set that started it all! This iconic phonics-based learn-to-read set has sold millions of copies, allowing children around the world to say with pride, "I read the whole book!" With only four letter sounds in the first story (M, A, T, and S), children can read a whole book and their confidence grows.
-                    </div>
-                    <button class="expand-btn" onclick="toggleExpand('book-desc-1', this)">Show more</button>
-                </div>
+<div class="amz-page">
 
-                <div class="amz-reviews">
-                    <h4>Customer Reviews</h4>
-                    <div class="persona-box" style="margin-bottom: 16px;">
-                        <strong>Reviewer Persona</strong>
-                        <div class="expandable" id="persona-book-1">
-                            <strong>Demographics:</strong> Male, mid-40s, lives in a city with a large liberal population. Technical/professional field, likely software development or IT. American. Married with young children. Self-identifies as conservative but intellectually independent.<br><br>
-                            <strong>Interests:</strong> Political philosophy and conservative thought. Technology and software development. Children's literature and educational materials. Vintage collectibles. Metaphysics and theology. Science fiction literature. Media criticism and analysis of bias.<br><br>
-                            <strong>Values:</strong> Intellectual honesty and fact-checking above partisan loyalty. Personal responsibility and self-reliance. Traditional family values discovered through experience. Critical thinking over blind acceptance. Practical application of knowledge. Skepticism toward both political extremes.<br><br>
-                            <strong>Communication:</strong> Conversational and accessible writing style. Extensive use of personal anecdotes. Self-deprecating humor. Balanced critique approach. Frequent use of parenthetical asides. Direct address to potential readers. Clear structural organization.
-                        </div>
-                        <button class="expand-btn" onclick="toggleExpand('persona-book-1', this)">Show more</button>
-                    </div>
-
-                    <div class="ground-truth" style="background: #FFF7ED; border-left-color: #FF9900;">
-                        <div class="ground-truth-label" style="color: #C2410C;">Ground Truth Review</div>
-                        <div class="amz-review-header">
-                            <span class="amz-review-title">Not impressed.</span>
-                            <span class="amz-verified">Verified Purchase</span>
-                        </div>
-                        <div class="amz-review-text">
-                            I'm currently working through these books with my children, one of whom is in Kindergarten. They made me long for the days of the "Tip and Mitten" and "Dick and Jane" readers.<br><br>The drawings are of poor quality. I could draw better myself. And, more frustrating to me, there is no attempt at any kind of story. What there is consists of random sentence fragments concentrated around certain phonetics.<br><br>What does work in these books is the progression of usage of words from very simple to slightly more complex by the end of the book, and the series concept allows the child to slowly build competence in reading.<br><br>So, they're not all bad and I am working with them, but do yourself a favor and unless your local school system has you roped into using them at home, look around and see what your other options are.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Carousel -->
+    <div class="carousel-nav">
+        <button class="carousel-btn" id="prevBtn">‹</button>
+        <button class="carousel-btn" id="nextBtn">›</button>
     </div>
 
-    <div class="example-divider"><span>Example 2</span></div>
+    <!-- Example 1 -->
+    <div class="example-slide active" id="example-1">
+        <div class="amz-main-content">
+            <!-- INPUT -->
+            <div class="annotated-section input-section">
+                <div class="section-label">
+                    <span class="section-label-text input">Input</span>
+                </div>
+                <div class="section-content">
+                    <div class="amz-header">
+                        <a href="#" class="amz-logo">amazon<span>.com</span></a>
+                        <div class="amz-search">
+                            <input type="text" value="Bob Books Set 1" disabled>
+                            <button>
+                                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                            </button>
+                        </div>
+                    </div>
 
-    <div class="amz-header">
-        <div class="amz-logo">amazon<span>.com</span></div>
-        <div class="amz-search">
-            <input type="text" value="Ultimate Biography of Earth" disabled>
-            <button>Search</button>
+                    <div class="amz-card">
+                        <div class="amz-layout">
+                            <div class="amz-cover" style="background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);">
+                                <div class="amz-cover-title">BOB BOOKS</div>
+                                <div>Set 1: Beginning Readers</div>
+                            </div>
+                            <div class="amz-details">
+                                <h3>Bob Books - Set 1: Beginning Readers Box Set | Phonics, Ages 4 and up, Kindergarten</h3>
+                                <div class="amz-author">by Bobby Lynn Maslen (Author), John R. Maslen (Illustrator)</div>
+                                <div class="amz-rating">
+                                    <span class="amz-stars">★★★★★</span>
+                                    <span class="amz-rating-count">12,847 ratings</span>
+                                </div>
+                                <div class="amz-description">
+                                    <div class="expandable" id="book-desc-1">
+                                        <strong>From the Author:</strong> You've prepared your child for reading - refrigerator magnets down low and easy to reach; letter sounds taught. Your child can proudly spell his or her name. Perhaps he can identify the "stop" and "open" signs as you drive in your car. He or she is ready for the next step into reading. Inside the colorful box, the bright red cover beckons. On the first page, the letters: M - a - t. Your child says the sounds: mmmmm, aaa, ttt. Then, faster: "Mat." Your youngster has read his first word! "Sam", "sat" and "on" complete the vocabulary, and suddenly your child can say, "I read the whole book!" That is the magic of Bob Books. After 13 years of teaching 3, 4 and 5-year-olds, watching a child make that giant first step into reading still thrills me.<br><br>
+                                        <strong>Features:</strong> The Bob Books boxed set that started it all! This iconic phonics-based learn-to-read set has sold millions of copies, allowing children around the world to say with pride, "I read the whole book!" With only four letter sounds in the first story (M, A, T, and S), children can read a whole book and their confidence grows.
+                                    </div>
+                                    <button class="expand-btn" onclick="toggleExpand('book-desc-1', this)">Show more</button>
+                                </div>
+
+                                <!-- User Persona (part of input) -->
+                                <div class="user-persona-card">
+                                    <div class="persona-header">
+                                        <div class="persona-avatar">
+                                            <img src="https://api.dicebear.com/7.x/personas/svg?seed=male_book_reviewer_1" alt="Reviewer">
+                                        </div>
+                                        <div class="persona-info">
+                                            <div class="persona-username">Reviewer Persona</div>
+                                            <div class="persona-subtitle">User Persona</div>
+                                        </div>
+                                    </div>
+                                    <div class="persona-details">
+                                        <div class="persona-row"><span class="persona-key">Demographics:</span> Male, mid-40s, lives in a city with a large liberal population. Technical/professional field, likely software development or IT. American. Married with young children.</div>
+                                        <div class="persona-row"><span class="persona-key">Interests:</span> Political philosophy and conservative thought. Technology and software development. Children's literature and educational materials.</div>
+                                        <div class="persona-row"><span class="persona-key">Values:</span> Intellectual honesty and fact-checking above partisan loyalty. Personal responsibility and self-reliance. Traditional family values discovered through experience.</div>
+                                        <div class="persona-row"><span class="persona-key">Communication:</span> Conversational and accessible writing style. Extensive use of personal anecdotes. Self-deprecating humor. Balanced critique approach.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OUTPUT: Only the predicted review -->
+            <div class="annotated-section output-section">
+                <div class="section-label">
+                    <span class="section-label-text output">Output</span>
+                </div>
+                <div class="section-content">
+                    <div class="amz-reviews">
+                        <div class="predicted-review-box">
+                            <div class="predicted-label">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                Ground Truth Review
+                            </div>
+                            <div class="amz-review-item">
+                                <div class="amz-review-header">
+                                    <span class="amz-review-title">Not impressed.</span>
+                                    <span class="amz-verified">Verified Purchase</span>
+                                </div>
+                                <div class="amz-review-author">
+                                    <div class="amz-review-avatar">
+                                        <img src="https://api.dicebear.com/7.x/personas/svg?seed=male_book_reviewer_1" alt="Reviewer">
+                                    </div>
+                                    <div>
+                                        <div class="amz-review-author-name">Customer</div>
+                                        <div class="amz-review-date">Reviewed in the United States on November 15, 2023</div>
+                                    </div>
+                                </div>
+                                <div class="amz-review-text">
+                                    I'm currently working through these books with my children, one of whom is in Kindergarten. They made me long for the days of the "Tip and Mitten" and "Dick and Jane" readers.<br><br>The drawings are of poor quality. I could draw better myself. And, more frustrating to me, there is no attempt at any kind of story. What there is consists of random sentence fragments concentrated around certain phonetics.<br><br>What does work in these books is the progression of usage of words from very simple to slightly more complex by the end of the book, and the series concept allows the child to slowly build competence in reading.<br><br>So, they're not all bad and I am working with them, but do yourself a favor and unless your local school system has you roped into using them at home, look around and see what your other options are.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="amz-card">
-        <div class="amz-layout">
-            <div class="amz-cover" style="background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);">
-                <div class="amz-cover-title">THE ULTIMATE BIOGRAPHY OF EARTH</div>
-                <div>Nick Lund</div>
+
+    <!-- Example 2 -->
+    <div class="example-slide" id="example-2">
+        <div class="amz-main-content">
+            <!-- INPUT -->
+            <div class="annotated-section input-section">
+                <div class="section-label">
+                    <span class="section-label-text input">Input</span>
+                </div>
+                <div class="section-content">
+                    <div class="amz-header">
+                        <a href="#" class="amz-logo">amazon<span>.com</span></a>
+                        <div class="amz-search">
+                            <input type="text" value="Ultimate Biography of Earth" disabled>
+                            <button>
+                                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="amz-card">
+                        <div class="amz-layout">
+                            <div class="amz-cover" style="background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);">
+                                <div class="amz-cover-title">THE ULTIMATE BIOGRAPHY OF EARTH</div>
+                                <div>Nick Lund</div>
+                            </div>
+                            <div class="amz-details">
+                                <h3>The Ultimate Biography of Earth: From the Big Bang to Today!</h3>
+                                <div class="amz-author">by Nick Lund (Author), Jason Ford (Illustrator)</div>
+                                <div class="amz-rating">
+                                    <span class="amz-stars">★★★★☆</span>
+                                    <span class="amz-rating-count">284 ratings</span>
+                                </div>
+                                <div class="amz-description">
+                                    <div class="expandable" id="book-desc-2">
+                                        <strong>Description:</strong> The natural history of Earth, told in biography form. Told in a lively, illustrated biography form to deliver its cutting-edge science in the most compelling way, here is the story of Earth, from the chaotic Hadean eon with its huge oceans of molten rock to today's Cenozoic era, aka the Age of Mammals (and that includes us humans). Learn about the Great Oxygenation Event. Meet some of the planet's wildest life-forms, like Megatherium—a sloth as big as an elephant. Watch the continents separate, crash together, and reform. Get an eyewitness view of Earth's major mass extinction events, including the asteroid strike that doomed the dinosaurs.
+                                    </div>
+                                    <button class="expand-btn" onclick="toggleExpand('book-desc-2', this)">Show more</button>
+                                </div>
+
+                                <!-- User Persona (part of input) -->
+                                <div class="user-persona-card">
+                                    <div class="persona-header">
+                                        <div class="persona-avatar">
+                                            <img src="https://api.dicebear.com/7.x/personas/svg?seed=female_book_reviewer_2" alt="Reviewer">
+                                        </div>
+                                        <div class="persona-info">
+                                            <div class="persona-username">Reviewer Persona</div>
+                                            <div class="persona-subtitle">User Persona</div>
+                                        </div>
+                                    </div>
+                                    <div class="persona-details">
+                                        <div class="persona-row"><span class="persona-key">Demographics:</span> Yoga instructor teaching for nearly a decade. Parent of multiple children including a 9-year-old, 4-year-old son, and tween daughter. Long-time knitter.</div>
+                                        <div class="persona-row"><span class="persona-key">Interests:</span> Children's literature and educational books, particularly DK series. Wellness and self-care books. Feminist literature and women's history.</div>
+                                        <div class="persona-row"><span class="persona-key">Values:</span> Diversity and representation. Authenticity over preachiness. Practical, accessible advice. Quality children's education through engaging materials.</div>
+                                        <div class="persona-row"><span class="persona-key">Communication:</span> Structured reviews with clear, descriptive titles. First-person perspective combined with family reactions. Conversational yet informative tone.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="amz-details">
-                <h3>The Ultimate Biography of Earth: From the Big Bang to Today!</h3>
-                <div class="amz-author">by Nick Lund (Author), Jason Ford (Illustrator)</div>
-                <div class="amz-rating">
-                    <span class="amz-stars">★★★★☆</span>
-                    <span class="amz-rating-count">284 ratings</span>
-                </div>
-                <div class="amz-description">
-                    <div class="expandable" id="book-desc-2">
-                        <strong>Description:</strong> The natural history of Earth, told in biography form. Told in a lively, illustrated biography form to deliver its cutting-edge science in the most compelling way, here is the story of Earth, from the chaotic Hadean eon with its huge oceans of molten rock to today's Cenozoic era, aka the Age of Mammals (and that includes us humans). Learn about the Great Oxygenation Event. Meet some of the planet's wildest life-forms, like Megatherium—a sloth as big as an elephant. Watch the continents separate, crash together, and reform. Get an eyewitness view of Earth's major mass extinction events, including the asteroid strike that doomed the dinosaurs.
-                    </div>
-                    <button class="expand-btn" onclick="toggleExpand('book-desc-2', this)">Show more</button>
-                </div>
 
-                <div class="amz-reviews">
-                    <h4>Customer Reviews</h4>
-                    <div class="persona-box" style="margin-bottom: 16px;">
-                        <strong>Reviewer Persona</strong>
-                        <div class="expandable" id="persona-book-2">
-                            <strong>Demographics:</strong> Yoga instructor teaching for nearly a decade. Parent of multiple children including a 9-year-old, 4-year-old son, and tween daughter. Long-time knitter.<br><br>
-                            <strong>Interests:</strong> Children's literature and educational books, particularly DK series. Wellness and self-care books. Feminist literature and women's history. Art history and Renaissance artists. Knitting and craft books. Children's mindfulness and yoga activities. Environmental and social justice themes in children's books.<br><br>
-                            <strong>Values:</strong> Diversity and representation. Authenticity over preachiness. Practical, accessible advice. Quality children's education through engaging materials. Environmental awareness and conservation. Artistic merit and beautiful presentation. Gift-giving culture.<br><br>
-                            <strong>Communication:</strong> Structured reviews with clear, descriptive titles. First-person perspective combined with family reactions. Conversational yet informative tone. Consistent pattern of ending reviews with gift recommendations. Emphasis on visual quality.
-                        </div>
-                        <button class="expand-btn" onclick="toggleExpand('persona-book-2', this)">Show more</button>
-                    </div>
-
-                    <div class="ground-truth" style="background: #FFF7ED; border-left-color: #FF9900;">
-                        <div class="ground-truth-label" style="color: #C2410C;">Ground Truth Review</div>
-                        <div class="amz-review-header">
-                            <span class="amz-review-title">Great Book!</span>
-                            <span class="amz-verified">Verified Purchase</span>
-                        </div>
-                        <div class="amz-review-text">
-                            I got this for my science-obsessed 7 year old, and I learned a few things along the way. This is a great book about the history and possible future of the earth. It's really well-written. (I wasn't expecting the former.) The illustrations are nice and the language is kid-friendly and explains complex things very simply. I am very pleased with this. Would make a great gift.
+            <!-- OUTPUT: Only the predicted review -->
+            <div class="annotated-section output-section">
+                <div class="section-label">
+                    <span class="section-label-text output">Output</span>
+                </div>
+                <div class="section-content">
+                    <div class="amz-reviews">
+                        <div class="predicted-review-box">
+                            <div class="predicted-label">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                Ground Truth Review
+                            </div>
+                            <div class="amz-review-item">
+                                <div class="amz-review-header">
+                                    <span class="amz-review-title">Great Book!</span>
+                                    <span class="amz-verified">Verified Purchase</span>
+                                </div>
+                                <div class="amz-review-author">
+                                    <div class="amz-review-avatar">
+                                        <img src="https://api.dicebear.com/7.x/personas/svg?seed=female_book_reviewer_2" alt="Reviewer">
+                                    </div>
+                                    <div>
+                                        <div class="amz-review-author-name">Customer</div>
+                                        <div class="amz-review-date">Reviewed in the United States on March 8, 2024</div>
+                                    </div>
+                                </div>
+                                <div class="amz-review-text">
+                                    I got this for my science-obsessed 7 year old, and I learned a few things along the way. This is a great book about the history and possible future of the earth. It's really well-written. (I wasn't expecting the former.) The illustrations are nice and the language is kid-friendly and explains complex things very simply. I am very pleased with this. Would make a great gift.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
