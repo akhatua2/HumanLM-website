@@ -6,7 +6,12 @@
       "WebFetch(domain:cs.stanford.edu)",
       "Bash(ls:*)",
       "WebFetch(domain:datasets-server.huggingface.co)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(sips:*)",
+      "Bash(for img in /Users/arpan/Desktop/humanlm_website/pictures/*)",
+      "Bash(do sips --resampleHeightWidthMax 240 \"$img\")",
+      "Bash(done)",
+      "Bash(git checkout:*)"
     ]
   }
 }
