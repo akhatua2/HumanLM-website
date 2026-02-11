@@ -162,7 +162,33 @@
         footer .links a:hover {
             color: var(--text);
         }
-        
+
+        .bibtex-copy {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .bibtex-copy .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            background: var(--text);
+            color: var(--bg);
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .bibtex-copy .tooltip.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-4px);
+        }
+
         /* Responsive */
         @media (max-width: 640px) {
             nav .links {
@@ -223,10 +249,12 @@
             <div class="links">
                 <a href="#">arXiv</a>
                 <a href="https://github.com/zou-group/humanlm" target="_blank">GitHub</a>
-                <a href="#">BibTeX</a>
+                <a href="javascript:void(0)" class="bibtex-copy" onclick="copyBibtex(this)">BibTeX<span class="tooltip">Copied!</span></a>
             </div>
         </div>
     </footer>
+
+    <script src="bibtex.js"></script>
 
 </body>
 </html>

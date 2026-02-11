@@ -4,7 +4,9 @@
       "Bash(python3:*)",
       "Bash(vercel:*)",
       "WebFetch(domain:cs.stanford.edu)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "WebFetch(domain:datasets-server.huggingface.co)",
+      "Bash(curl:*)"
     ]
   }
 }
