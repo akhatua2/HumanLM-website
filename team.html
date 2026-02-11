@@ -6,6 +6,7 @@
     <meta name="description" content="HumanLM Team">
     <title>HumanLM — Team</title>
 
+    <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
@@ -105,7 +106,6 @@
         /* Team Grid */
         .team-section {
             padding-top: 2rem;
-            border-top: 1px solid var(--border);
             margin-bottom: 3rem;
         }
 
@@ -124,8 +124,13 @@
 
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-template-columns: repeat(5, 1fr);
             gap: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .team-grid:last-of-type {
+            margin-bottom: 0;
         }
 
         .team-member {
@@ -142,6 +147,12 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+        }
+
+        .team-member .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .team-member .avatar svg {
@@ -175,6 +186,12 @@
             font-size: 0.8rem;
             color: var(--accent);
             margin-bottom: 0.15rem;
+        }
+
+        .team-member .role-inline {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--accent);
         }
 
         /* Footer */
@@ -273,7 +290,7 @@
 
     <nav>
         <div class="container">
-            <a href="index.html" class="logo">HumanLM</a>
+            <a href="index.html" class="logo"><img src="logo.png" alt="" style="height: 1.8em; vertical-align: -0.4em; margin-right: 0.4rem;">HumanLM</a>
             <div class="links">
                 <a href="viewer.html">Datasets</a>
                 <a href="blog.html">Blog</a>
@@ -287,77 +304,86 @@
     <main>
         <section class="page-header">
             <h1>Team</h1>
-            <p>The people behind HumanLM.</p>
+            <p>The humans behind HumanLM.</p>
         </section>
 
         <section class="team-section">
+            <!-- Row 1: Equal contribution, sorted by last name -->
             <div class="team-grid">
                 <div class="team-member">
                     <div class="avatar">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                    </div>
-                    <div class="name"><a href="#">Shirley Wu</a><sup>*</sup></div>
-                    <div class="affiliation">Stanford University</div>
-                </div>
-                <div class="team-member">
-                    <div class="avatar">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        <img src="pictures/evelyn.jpg" alt="Evelyn Choi">
                     </div>
                     <div class="name"><a href="#">Evelyn Choi</a><sup>*</sup></div>
                     <div class="affiliation">Stanford University</div>
                 </div>
                 <div class="team-member">
                     <div class="avatar">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        <img src="pictures/arpan.jpg" alt="Arpandeep Khatua">
                     </div>
                     <div class="name"><a href="#">Arpandeep Khatua</a><sup>*</sup></div>
                     <div class="affiliation">Stanford University</div>
                 </div>
                 <div class="team-member">
                     <div class="avatar">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        <img src="pictures/shirley_wu.jpg" alt="Shirley Wu">
                     </div>
-                    <div class="name"><a href="#">Zhanghan Wang</a></div>
-                    <div class="affiliation">New York University</div>
+                    <div class="name"><a href="https://cs.stanford.edu/~shirwu/">Shirley Wu</a><sup>*</sup></div>
+                    <div class="affiliation">Stanford University · <span class="role-inline">Project Lead</span></div>
                 </div>
+            </div>
+
+            <!-- Row 2: Other authors, sorted by last name -->
+            <div class="team-grid">
                 <div class="team-member">
                     <div class="avatar">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        <img src="pictures/joy.png" alt="Joy He-Yueya">
                     </div>
                     <div class="name"><a href="#">Joy He-Yueya</a></div>
                     <div class="affiliation">Stanford University</div>
                 </div>
                 <div class="team-member">
                     <div class="avatar">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        <img src="pictures/hank.png" alt="Zhanghan Wang">
                     </div>
-                    <div class="name"><a href="#">Tharindu Cyril Weerasooriya</a></div>
-                    <div class="affiliation">Accenture</div>
+                    <div class="name"><a href="#">Zhanghan Wang</a></div>
+                    <div class="affiliation">New York University</div>
                 </div>
                 <div class="team-member">
                     <div class="avatar">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        <img src="pictures/wei.png" alt="Wei Wei">
                     </div>
                     <div class="name"><a href="#">Wei Wei</a></div>
                     <div class="affiliation">Accenture</div>
                 </div>
                 <div class="team-member">
                     <div class="avatar">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        <img src="pictures/cyril.png" alt="Tharindu Cyril Weerasooriya">
+                    </div>
+                    <div class="name"><a href="#">Tharindu Cyril Weerasooriya</a></div>
+                    <div class="affiliation">Accenture</div>
+                </div>
+                <div class="team-member">
+                    <div class="avatar">
+                        <img src="pictures/diyi.png" alt="Diyi Yang">
                     </div>
                     <div class="name"><a href="#">Diyi Yang</a></div>
                     <div class="affiliation">Stanford University</div>
                 </div>
+            </div>
+
+            <!-- Row 3: Supervising professors, sorted by last name -->
+            <div class="team-grid">
                 <div class="team-member">
                     <div class="avatar">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        <img src="pictures/jure.png" alt="Jure Leskovec">
                     </div>
                     <div class="name"><a href="#">Jure Leskovec</a><sup>&dagger;</sup></div>
                     <div class="affiliation">Stanford University</div>
                 </div>
                 <div class="team-member">
                     <div class="avatar">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        <img src="pictures/james.jpg" alt="James Zou">
                     </div>
                     <div class="name"><a href="#">James Zou</a><sup>&dagger;</sup></div>
                     <div class="affiliation">Stanford University</div>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HumanLM | Data Viewer</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Roboto:wght@400;500;700&family=Georgia&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -151,6 +152,54 @@
             background: var(--accent);
             border-color: var(--accent);
             opacity: 0.9;
+        }
+
+        /* =============== DATASET INFO =============== */
+        .dataset-info {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem 1rem;
+        }
+
+        .dataset-info .description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text);
+            margin-bottom: 1.25rem;
+        }
+
+        .dataset-info .source {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .dataset-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .dataset-stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dataset-stat .stat-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .dataset-stat .stat-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
 
         /* =============== CONTENT AREA =============== */
@@ -327,6 +376,12 @@
 
         /* =============== RESPONSIVE =============== */
         @media (max-width: 768px) {
+            .dataset-info {
+                padding: 1rem 2rem;
+            }
+            .dataset-stats {
+                gap: 1.25rem;
+            }
             .navbar-links {
                 gap: 16px;
             }
@@ -355,7 +410,7 @@
 <body>
     <nav>
     <div class="container">
-            <a href="index.html" class="logo">HumanLM</a>
+            <a href="index.html" class="logo"><img src="logo.png" alt="" style="height: 1.8em; vertical-align: -0.4em; margin-right: 0.4rem;">HumanLM</a>
             <div class="links">
                 <a href="viewer.html" class="active">Datasets</a>
                 <a href="blog.html">Blog</a>
@@ -377,6 +432,8 @@
                 <button class="tab" data-tab="email">Humanual-Email</button>
         </div>
     </div>
+
+        <div class="dataset-info" id="dataset-info"></div>
 
         <div class="container">
             <div class="content-area" id="content-area">
@@ -405,6 +462,53 @@
     </footer>
 
     <script>
+        // Dataset descriptions
+        const datasetInfo = {
+            news: {
+                description: 'Humanual-News contains comments from YouTube users on videos posted by BBC and CNN news channels. The dataset highlights users\' different reactions and opinions regarding news events, using video transcriptions as input contexts.',
+                source: 'YouTube Data API v3 · YouTube Transcript API',
+                stats: { Users: '10,900', Posts: '6,117', Comments: '43,273', 'Avg Turns': '1.36' }
+            },
+            book: {
+                description: 'Humanual-Book contains Amazon book reviews from frequent customers, each with around 192 reviews on average. The reviews express satisfaction or dissatisfaction with book content, reflecting users\' preferences and tastes.',
+                source: 'Amazon Reviews 2023',
+                stats: { Users: '209', Posts: '34,886', Comments: '40,136', 'Avg Reviews/User': '192' }
+            },
+            opinion: {
+                description: 'Humanual-Opinion contains Reddit users expressing opinions across diverse personal-issue threads (r/AITA). These responses reflect users\' moral standards on controversial topics, e.g., family conflicts and life decisions.',
+                source: 'Reddit r/AITA via asyncpraw',
+                stats: { Users: '4,567', Threads: '992', Comments: '45,716', 'Avg Turns': '3.55' }
+            },
+            politics: {
+                description: 'Humanual-Politics consists of Medium users and their responses to blog posts on political topics. It features diverse political stances from real users spanning different cultural backgrounds, intended to simulate user responses to long-form written content.',
+                source: 'RapidAPI Medium endpoint',
+                stats: { Users: '5,303', Posts: '14,557', Comments: '50,273', 'Avg Turns': '1.76' }
+            },
+            chat: {
+                description: 'Humanual-Chat consists of conversations between users and LLM assistants of 5\u201310 turns, adapted from WildChat. The goal is to simulate interactive user behaviors with LLM assistants, including follow-ups, goal changes, and clarification turns.',
+                source: 'WildChat',
+                stats: { Users: '4,801', Conversations: '4,826', Messages: '29,334', 'Avg Turns': '7.56' }
+            },
+            email: {
+                description: 'Humanual-Email is adapted from the Enron email dataset. It captures user communication in business settings, including decision negotiation, project status reporting, and constraint resolution.',
+                source: 'Enron corpus',
+                stats: { Users: '399', Threads: '5,153', Messages: '7,577', 'Avg Turns': '1.68' }
+            }
+        };
+
+        function renderDatasetInfo(tabName) {
+            const info = datasetInfo[tabName];
+            if (!info) return;
+            const statsHtml = Object.entries(info.stats).map(([label, value]) =>
+                `<div class="dataset-stat"><span class="stat-value">${value}</span><span class="stat-label">${label}</span></div>`
+            ).join('');
+            document.getElementById('dataset-info').innerHTML = `
+                <p class="description">${info.description}</p>
+                <div class="source">${info.source}</div>
+                <div class="dataset-stats">${statsHtml}</div>
+            `;
+        }
+
         // Tab state
         let currentTab = 'news';
         const contentCache = {};
@@ -551,7 +655,10 @@
             
             // Update URL hash
             updateURLHash(tabName);
-            
+
+            // Update dataset info
+            renderDatasetInfo(tabName);
+
             // Load component
             loadComponent(tabName);
         }

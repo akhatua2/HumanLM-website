@@ -6,6 +6,7 @@
     <meta name="description" content="HumanLM: Simulating Users with State Alignment Beats Response Imitation">
     <title>HumanLM</title>
     
+    <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
@@ -140,13 +141,13 @@
         }
         
         /* Authors */
-        .authors {
+        .bibtex {
             margin-bottom: 4rem;
             padding-top: 2rem;
             border-top: 1px solid var(--border);
         }
-        
-        .authors-label {
+
+        .bibtex-label {
             font-family: 'IBM Plex Mono', monospace;
             font-size: 0.75rem;
             text-transform: uppercase;
@@ -154,30 +155,37 @@
             color: var(--text-secondary);
             margin-bottom: 1rem;
         }
-        
-        .authors-list {
-            font-size: 0.95rem;
-            line-height: 1.8;
-        }
-        
-        .authors-list a {
-            color: var(--text);
-            text-decoration: none;
-        }
-        
-        .authors-list a:hover {
-            text-decoration: underline;
-        }
-        
-        .authors-list sup {
-            font-size: 0.7em;
-            color: var(--text-secondary);
-        }
-        
-        .authors-note {
+
+        .bibtex pre {
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.8rem;
+            line-height: 1.6;
+            background: #f0f0f0;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .bibtex .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 0.3rem 0.6rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
             color: var(--text-secondary);
-            margin-top: 0.75rem;
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .bibtex .copy-btn:hover {
+            color: var(--text);
+            border-color: var(--text-secondary);
         }
         
         /* Figure */
@@ -305,7 +313,7 @@
 
     <nav>
     <div class="container">
-            <a href="#" class="logo">HumanLM</a>
+            <a href="#" class="logo"><img src="logo.png" alt="" style="height: 1.8em; vertical-align: -0.4em; margin-right: 0.4rem;">HumanLM</a>
             <div class="links">
                 <a href="viewer.html">Datasets</a>
                 <a href="blog.html">Blog</a>
@@ -356,23 +364,16 @@
             </p>
         </section>
 
-        <section class="authors">
-            <div class="authors-label">Authors</div>
-            <div class="authors-list">
-                <a href="#">Shirley Wu</a><sup>*1</sup>, 
-                <a href="#">Evelyn Choi</a><sup>*1</sup>, 
-                <a href="#">Arpandeep Khatua</a><sup>*1</sup>, 
-                <a href="#">Zhanghan Wang</a><sup>2</sup>, 
-                <a href="#">Joy He-Yueya</a><sup>1</sup>, 
-                <a href="#">Tharindu Cyril Weerasooriya</a><sup>3</sup>, 
-                <a href="#">Wei Wei</a><sup>3</sup>, 
-                <a href="#">Diyi Yang</a><sup>1</sup>, 
-                <a href="#">Jure Leskovec</a><sup>†1</sup>, 
-                <a href="#">James Zou</a><sup>†1</sup>
-            </div>
-            <div class="authors-note">
-                <sup>1</sup>Stanford University · <sup>2</sup>New York University · <sup>3</sup>Accenture · <sup>*</sup>Equal contribution · <sup>†</sup>Equal supervision
-            </div>
+        <section class="bibtex">
+            <div class="bibtex-label">Citation</div>
+            <pre><button class="copy-btn" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('code').textContent).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)})">Copy</button><code>@article{wu2025humanlm,
+  title={HUMANLM: Simulating Users with State Alignment Beats Response Imitation},
+  url={https://humanlm.stanford.edu/},
+  author={Wu, Shirley and Choi, Evelyn and Khatua, Arpandeep and
+          Wang, Zhanghan and He-Yueya, Joy and Weerasooriya, Tharindu Cyril and
+          Wei, Wei and Yang, Diyi and Leskovec, Jure and Zou, James},
+  year={2025}
+}</code></pre>
         </section>
     </main>
 
